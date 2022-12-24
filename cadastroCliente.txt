@@ -1,0 +1,12 @@
+
+Dados do cliente: 
+Nome: JULIO CESAR DE ABREU
+Salário: 95000.0
+Idade : 39
+Email: juliocasp38@gmail.com
+
+Dados do cliente: 
+Nome: VALERIA OLIVEIRA SIQUEIRA DE ABREU
+Salário: 20500.0
+Idade : 25
+Email: valeriolisiqueira@gmail.com

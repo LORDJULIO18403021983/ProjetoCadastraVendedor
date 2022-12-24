@@ -1,0 +1,17 @@
+PrintStream
+A classe PrintStream possui um construtor que já
+recebe um nome de um arquivo como argumento
+
+È importante lembrar que o arquivo de saida
+DEVE SER FECHADO USANDO O METODO CLOSE
+ARQUIVO SALVO COM SUCESSO!!!
+
+FileOutPutStream
+Utilizando o FileOutPutStream é possivel
+Abrir um arquivo e gravar dados sem
+Ser necessároio sobrescrever o arquivo
+
+FileOutPutStream
+Utilizando o FileOutPutStream é possivel
+Abrir um arquivo e gravar dados sem
+Ser necessároio sobrescrever o arquivo
