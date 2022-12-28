@@ -14,8 +14,10 @@ public class TelaInsereVendedor extends JFrame {
     private JButton inserir, consultar, limpar, cancelar;
     private JLabel labelNome, labelSalario, labelEmail, labelIdade, labelCidade, labelEstado;
     private JTextField textFieldNome, textFieldSalario, textFieldEmail, textFieldIdade, textFieldCidade, textFieldEstado;
-    private int numeroVetor = 0;
-    private Vendedor[] arrayVendedor = new Vendedor[5];
+    private int contadorVendedor = 2;
+    private int quantidadeVendedores = 0;
+    private Vendedor[] arrayVendedor = new Vendedor[contadorVendedor];
+    private Vendedor vendedor = new Vendedor();
 
     public static void main(String[] args) {
         TelaInsereVendedor aplicativo = new TelaInsereVendedor();
@@ -106,16 +108,75 @@ public class TelaInsereVendedor extends JFrame {
     public class InserirListener implements ActionListener {
         public void actionPerformed(ActionEvent event) {
 
-            Vendedor vendedor = new Vendedor();
-            vendedor.setNome(textFieldNome.getText().trim().toUpperCase());
-            vendedor.setSalario(Double.parseDouble(textFieldSalario.getText().trim()));
-            vendedor.setEmail(textFieldEmail.getText().trim());
-            vendedor.setIdade(Integer.parseInt(textFieldIdade.getText().trim()));
-            vendedor.setCidade(textFieldCidade.getText().trim().toUpperCase());
-            vendedor.setEstado(textFieldEstado.getText().trim().toUpperCase());
-            arrayVendedor[numeroVetor] = vendedor;
-            System.out.println("\n Dados do vendedor inseridos com sucesso!!!");
-            arrayVendedor[numeroVetor].exibirDados();
+            if (quantidadeVendedores <= 2) {
+                try {
+                    if (textFieldNome.getText().isEmpty()) {
+                        JOptionPane.showMessageDialog(null, "O nome não pode estar vazio!", "Informação", JOptionPane.ERROR_MESSAGE);
+                    } else if (textFieldNome.getText().length() > 50) {
+                        JOptionPane.showMessageDialog(null, "O nome não pode ter mais de 50 caracteres!", "Informação", JOptionPane.ERROR_MESSAGE);
+                    } else {
+                        vendedor.setNome(textFieldNome.getText().trim().toUpperCase());
+                    }
+                } catch (Exception erro) {
+                    JOptionPane.showMessageDialog(null, "Erro no campo nome!", "ERRO!", JOptionPane.ERROR_MESSAGE);
+                }
+                try {
+                    if (textFieldSalario.getText().trim().isEmpty() || textFieldSalario.getText().trim().equals("")) {
+                        JOptionPane.showMessageDialog(null, "O salário não pode estar vazio. ", "Erro", JOptionPane.ERROR_MESSAGE);
+                    } else {
+                        vendedor.setSalario(Double.parseDouble(textFieldSalario.getText().trim()));
+                    }
+                } catch (NumberFormatException erro) {
+                    JOptionPane.showMessageDialog(null, "Digite apenas numero!", "Erro!", JOptionPane.ERROR_MESSAGE);
+                }
+                try {
+                    int indexador = textFieldEmail.getText().trim().indexOf('@');
+                    if (indexador > 2) {
+                        vendedor.setEmail(textFieldEmail.getText().trim());
+                    } else {
+                        JOptionPane.showMessageDialog(null, "Formato de email inválido.\nExemplo: abc@gmail.com", "ERRO", JOptionPane.ERROR_MESSAGE);
+                    }
+                } catch (Exception erro) {
+                    JOptionPane.showMessageDialog(null, "Erro no campo do email!", "ERRO", JOptionPane.ERROR_MESSAGE);
+                }
+                try {
+                    if (textFieldIdade.getText().trim().equals("") || textFieldIdade.getText().trim().isEmpty()) {
+                        JOptionPane.showMessageDialog(null, "Formato da idade inválido!", "ERRO", JOptionPane.ERROR_MESSAGE);
+                    } else {
+                        vendedor.setIdade(Integer.parseInt(textFieldIdade.getText().trim()));
+                    }
+                } catch (NumberFormatException erro) {
+                    JOptionPane.showMessageDialog(null, "Erro no campo idade.\nDigite apenas numero!", "ERRO", JOptionPane.ERROR_MESSAGE);
+                }
+                try {
+                    if (textFieldCidade.getText().isEmpty()) {
+                        JOptionPane.showMessageDialog(null, "O campo cidade não pode estar vazio!", "Informação", JOptionPane.ERROR_MESSAGE);
+                    } else if (textFieldCidade.getText().length() > 30) {
+                        JOptionPane.showMessageDialog(null, "O campo cidade não pode ter mais de 30 caracteres!", "Informação", JOptionPane.ERROR_MESSAGE);
+                    } else {
+                        vendedor.setCidade(textFieldCidade.getText().trim().toUpperCase());
+                    }
+                } catch (Exception erro) {
+                    JOptionPane.showMessageDialog(null, "Erro no campo cidade", "ERRO", JOptionPane.ERROR_MESSAGE);
+                }
+                try {
+                    if (textFieldEstado.getText().isEmpty()) {
+                        JOptionPane.showMessageDialog(null, "O campo estado não pode estar vazio.", " ERRO", JOptionPane.ERROR_MESSAGE);
+                    } else if (textFieldEstado.getText().length() > 30) {
+                        JOptionPane.showMessageDialog(null, "O campo estado não pode ter mais de 30 caracteres!", "Informação", JOptionPane.ERROR_MESSAGE);
+                    } else {
+                        vendedor.setEstado(textFieldEstado.getText().trim().toUpperCase());
+                    }
+                } catch (Exception erro) {
+                    JOptionPane.showMessageDialog(null, "Erro no campo estado.", "ERRO", JOptionPane.ERROR_MESSAGE);
+                }
+                arrayVendedor[quantidadeVendedores] = vendedor;
+                System.out.println("\n Dados do vendedor inseridos com sucesso!!!");
+                arrayVendedor[quantidadeVendedores].exibirDados();
+                contadorVendedor++;
+            } else {
+                JOptionPane.showMessageDialog(null, "Numero máximo de cadastro atingido!", "Informação", JOptionPane.ERROR_MESSAGE);
+            }
         }
     }
 
@@ -124,13 +185,12 @@ public class TelaInsereVendedor extends JFrame {
 
             // Exibe os dados registrados.
             System.out.println("\n Dados do vendedor ==>");
-            arrayVendedor[numeroVetor].exibirDados();
-
+            arrayVendedor[quantidadeVendedores].exibirDados();
             try {
                 if (e == null) {
                     JOptionPane.showMessageDialog(null, "Arquivo não encontrado!");
                 }
-            }catch (Exception erro){
+            } catch (Exception erro) {
                 JOptionPane.showMessageDialog(null, " Verifique se há algum registro salvo!");
             }
         }
