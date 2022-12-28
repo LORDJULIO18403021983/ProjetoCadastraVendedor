@@ -57,12 +57,11 @@ public class Vendedor {
     }
 
     public void exibirDados() {
-        System.out.println(" Nome: " + nome);
-        System.out.println(" Salário:" + salario);
-        System.out.println(" Email:" + email);
-        System.out.println(" Idade: " + idade);
-        System.out.println(" Cidade:" + cidade);
-        System.out.println(" Estado:" + estado);
+        System.out.println(" Nome: " + getNome());
+        System.out.println(" Salário:" + getSalario());
+        System.out.println(" Email:" + getEmail());
+        System.out.println(" Idade: " + getIdade());
+        System.out.println(" Cidade:" + getCidade());
+        System.out.println(" Estado:" + getEstado());
     }
-
 }

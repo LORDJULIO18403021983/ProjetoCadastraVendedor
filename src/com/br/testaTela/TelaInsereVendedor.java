@@ -60,7 +60,7 @@ public class TelaInsereVendedor extends JFrame {
         textFieldIdade.setBounds(250, 160, 250, 20);
         textFieldCidade = new JTextField(null, "Cidade ...", 15);
         textFieldCidade.setBounds(250, 200, 250, 20);
-        textFieldEstado = new JTextField(null, "Estado ...", 03);
+        textFieldEstado = new JTextField(null, "Estado ...", 3);
         textFieldEstado.setBounds(250, 240, 250, 20);
 
         // Adiciona os elementos TextField na janela.
@@ -187,13 +187,13 @@ public class TelaInsereVendedor extends JFrame {
 
             // Exibe os dados registrados.
             System.out.println("\n Dados do vendedor ==>");
-            for (int i = 0; i < arrayVendedor.length; i++) {
-                arrayVendedor[i].setNome(textFieldNome.getText().trim().toUpperCase());
-                arrayVendedor[i].setSalario(Double.parseDouble(textFieldSalario.getText().trim()));
-                arrayVendedor[i].setEmail(textFieldEmail.getText().trim());
-                arrayVendedor[i].setIdade(Integer.parseInt(textFieldIdade.getText().trim()));
-                arrayVendedor[i].setCidade(textFieldCidade.getText().trim().toUpperCase());
-                arrayVendedor[i].setEstado(textFieldEstado.getText().trim().toUpperCase());
+//            for (int i = 0; i < arrayVendedor.length; i++) {
+//                arrayVendedor[i].setNome(textFieldNome.getText().trim().toUpperCase());
+//                arrayVendedor[i].setSalario(Double.parseDouble(textFieldSalario.getText().trim()));
+//                arrayVendedor[i].setEmail(textFieldEmail.getText().trim());
+//                arrayVendedor[i].setIdade(Integer.parseInt(textFieldIdade.getText().trim()));
+//                arrayVendedor[i].setCidade(textFieldCidade.getText().trim().toUpperCase());
+//                arrayVendedor[i].setEstado(textFieldEstado.getText().trim().toUpperCase());
 
                 arrayVendedor[i].exibirDados();
                 System.out.println("====================================================\n");
@@ -204,7 +204,7 @@ public class TelaInsereVendedor extends JFrame {
                 } catch (Exception erro) {
                     JOptionPane.showMessageDialog(null, " Verifique se há algum registro salvo!");
                 }
-            }
+//            }
         }
     }
 
