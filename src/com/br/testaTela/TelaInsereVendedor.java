@@ -172,7 +172,7 @@ public class TelaInsereVendedor extends JFrame {
             System.out.println("\n Dados do vendedor inseridos com sucesso!!!");
             arrayVendedor[i].exibirDados();
             i++;
-            if (i > 4) {
+            if (i > 5) {
                 try {
                     JOptionPane.showMessageDialog(null, "Numero máximo de cadastro!", "Informação", JOptionPane.ERROR_MESSAGE);
                 } catch (ArrayIndexOutOfBoundsException erro) {
@@ -187,22 +187,23 @@ public class TelaInsereVendedor extends JFrame {
 
             // Exibe os dados registrados.
             System.out.println("\n Dados do vendedor ==>");
-            for (int j = 0; j < arrayVendedor.length; j++) {
-                arrayVendedor[j].setNome(textFieldNome.getText().trim().toUpperCase());
-                arrayVendedor[j].setSalario(Double.parseDouble(textFieldSalario.getText().trim()));
-                arrayVendedor[j].setEmail(textFieldEmail.getText().trim());
-                arrayVendedor[j].setIdade(Integer.parseInt(textFieldIdade.getText().trim()));
-                arrayVendedor[j].setCidade(textFieldCidade.getText().trim().toUpperCase());
-                arrayVendedor[j].setEstado(textFieldEstado.getText().trim().toUpperCase());
+            for (int i = 0; i < arrayVendedor.length; i++) {
+                arrayVendedor[i].setNome(textFieldNome.getText().trim().toUpperCase());
+                arrayVendedor[i].setSalario(Double.parseDouble(textFieldSalario.getText().trim()));
+                arrayVendedor[i].setEmail(textFieldEmail.getText().trim());
+                arrayVendedor[i].setIdade(Integer.parseInt(textFieldIdade.getText().trim()));
+                arrayVendedor[i].setCidade(textFieldCidade.getText().trim().toUpperCase());
+                arrayVendedor[i].setEstado(textFieldEstado.getText().trim().toUpperCase());
 
-                arrayVendedor[j].exibirDados();
-            }
-            try {
-                if (arrayVendedor[i] == null) {
-                    JOptionPane.showMessageDialog(null, "Arquivo não encontrado!");
+                arrayVendedor[i].exibirDados();
+                System.out.println("====================================================\n");
+                try {
+                    if (arrayVendedor[i] == null) {
+                        JOptionPane.showMessageDialog(null, "Arquivo não encontrado!");
+                    }
+                } catch (Exception erro) {
+                    JOptionPane.showMessageDialog(null, " Verifique se há algum registro salvo!");
                 }
-            } catch (Exception erro) {
-                JOptionPane.showMessageDialog(null, " Verifique se há algum registro salvo!");
             }
         }
     }
