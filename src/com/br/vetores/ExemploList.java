@@ -70,5 +70,18 @@ public class ExemploList {
         for (String s : arrayList) {
             System.out.println(s);
         }
+        List<String> arrayListNovo = new ArrayList<String>(arrayList);
+        System.out.println("\nAdicionando o elemento nº 11 a nova lista");
+        arrayList.add("Elemento nº 11");
+
+        // verificando a diferença das duas listas
+        for (String s: arrayList) {
+            System.out.println("\nLista arrayList apos adiconar um novo elemento.");
+            System.out.println(s);
+        }
+        System.out.println("\nLista arrayListaNovo");
+        for(String s: arrayListNovo){
+            System.out.println(s);
+        }
     }
 }
