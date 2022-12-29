@@ -18,6 +18,8 @@ public class TelaInsereVendedor2 {
     private JButton inserir, consultar, limpar, cancelar;
     private JLabel labelNome, labelSalario, labelEmail, labelIdade, labelCidade, labelEstado;
     private JTextField textFieldNome, textFieldSalario, textFieldEmail, textFieldIdade, textFieldCidade, textFieldEstado;
+    private JComboBox<Object> comboBoxVendedor;
+    private String[] cargoDoVendedor = {"VendedorJunior", "VendedorSenior", "VendedorPleno", "VendedorMegaBlaster"};
 
     public static void main(String[] args) {
         TelaInsereVendedor2 aplicativo = new TelaInsereVendedor2();
@@ -90,12 +92,22 @@ public class TelaInsereVendedor2 {
         cancelar.addActionListener(new TelaInsereVendedor2.CancelarListener());
         cancelar.setBounds(340, 340, 95, 30);
 
-
         // configurando os botões
         janelaVendedor.add(inserir);
         janelaVendedor.add(consultar);
         janelaVendedor.add(limpar);
         janelaVendedor.add(cancelar);
+
+        //Cria o Menu retrátil.
+        comboBoxVendedor = new JComboBox<>(cargoDoVendedor);
+        comboBoxVendedor.setSelectedIndex(-1);
+        comboBoxVendedor.setBounds(40, 285, 200, 30);
+
+        // Numero de colunas visiveis
+        comboBoxVendedor.setMaximumRowCount(4);
+
+        // Adiciona no painel
+        janelaVendedor.add(comboBoxVendedor);
 
         // CONFIGURANDO A JANELA
         janelaVendedor.setSize(600, 500);
