@@ -53,7 +53,5 @@ public class ListFilme<arrayListFilme> {
         for (Filme f : arrayListFilme) {
             System.out.println(f.getCodigo() + " " + f.getNome());
         }
-
-
     }
 }
