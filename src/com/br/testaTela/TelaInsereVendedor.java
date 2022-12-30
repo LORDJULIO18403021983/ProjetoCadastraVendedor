@@ -170,7 +170,7 @@ public class TelaInsereVendedor extends JFrame {
                 JOptionPane.showMessageDialog(null, "Erro no campo estado.", "ERRO", JOptionPane.ERROR_MESSAGE);
             }
             System.out.println("\n Dados do vendedor inseridos com sucesso!!!");
-            arrayVendedor[i].exibirDados();
+            //arrayVendedor[i].exibirDados();
             i++;
             if (i > 5) {
                 try {

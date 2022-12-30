@@ -184,6 +184,14 @@ public class TelaInsereVendedor2 {
             System.out.println("\n Dados do vendedor inseridos com sucesso!!!");
 
             listaVendedor.add(vendedor);
+
+            if (listaVendedor.size() > 2) {
+                try {
+                    JOptionPane.showMessageDialog(null, "Numero máximo de cadastro!", "Informação", JOptionPane.ERROR_MESSAGE);
+                } catch (ArrayIndexOutOfBoundsException erro) {
+                    JOptionPane.showMessageDialog(null, " Possível apenas 5 registro!", "Informação", JOptionPane.ERROR_MESSAGE);
+                }
+            }
         }
     }
 
