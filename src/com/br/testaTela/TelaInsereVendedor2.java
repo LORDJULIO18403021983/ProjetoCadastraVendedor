@@ -12,7 +12,7 @@ public class TelaInsereVendedor2 {
      * e-mail = juliocasp38@gmail.com
      */
 
-    List<Vendedor> arrayListVendedor = new ArrayList<>();
+    List<Vendedor> listaVendedor = new ArrayList<>();
     Vendedor vendedor = new Vendedor();
     private JFrame janelaVendedor;
     private JButton inserir, consultar, limpar, cancelar;
@@ -92,7 +92,7 @@ public class TelaInsereVendedor2 {
         cancelar.addActionListener(new TelaInsereVendedor2.CancelarListener());
         cancelar.setBounds(340, 340, 95, 30);
 
-        // configurando os botões
+        // Adicionando os botões a janela.
         janelaVendedor.add(inserir);
         janelaVendedor.add(consultar);
         janelaVendedor.add(limpar);
@@ -120,8 +120,6 @@ public class TelaInsereVendedor2 {
     public class InserirListener implements ActionListener {
         public void actionPerformed(ActionEvent event) {
 
-
-            arrayListVendedor.add(vendedor);
             try {
                 if (textFieldNome.getText().isEmpty()) {
                     JOptionPane.showMessageDialog(null, "O nome não pode estar vazio!", "Informação", JOptionPane.ERROR_MESSAGE);
@@ -185,7 +183,7 @@ public class TelaInsereVendedor2 {
             }
             System.out.println("\n Dados do vendedor inseridos com sucesso!!!");
 
-            vendedor.exibirDados();
+            listaVendedor.add(vendedor);
         }
     }
 
@@ -193,16 +191,14 @@ public class TelaInsereVendedor2 {
         public void actionPerformed(ActionEvent e) {
 
             // Exibe os dados registrados.
-
-            arrayListVendedor.add(vendedor);
-            System.out.println("\n Dados do vendedor ==>");
-            for (Vendedor s : arrayListVendedor) {
+            System.out.println("\n Dados do vendedor ==>\n");
+            for (Vendedor s : listaVendedor) {
                 System.out.println("\nNome: " + s.getNome() + "\nSalário: " + s.getSalario() + "\nEmail: " + s.getEmail() + "\nIdade: " + s.getIdade()
                         + "\nCidade: " + s.getCidade() + "\nEstado: " + s.getEstado());
                 System.out.println("====================================================\n");
             }
             try {
-                if (arrayListVendedor == null) {
+                if (listaVendedor == null) {
                     JOptionPane.showMessageDialog(null, "Arquivo não encontrado!");
                 }
             } catch (Exception erro) {
