@@ -49,6 +49,7 @@ public class ListFilme<arrayListFilme> {
                 return 0;
             }
         });
+
         // Exibindo lista ordenada
         for (Filme f : arrayListFilme) {
             System.out.println(f.getCodigo() + " " + f.getNome());

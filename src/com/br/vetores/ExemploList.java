@@ -6,7 +6,7 @@ import java.util.List;
 
 public class ExemploList {
     public static void main(String[] args) {
-        // primeiro criamos o arryList.
+        // primeiro criamos o arrayList.
         List<String> arrayList = new ArrayList<String>();
         arrayList.add("Elemento nº 1");
         arrayList.add("Elemento nº 2");
@@ -26,6 +26,7 @@ public class ExemploList {
         }
         // obtendo o tamanho da lista chamando o metodo size()
         System.out.println("\nO tamanho da lista é:" + arrayList.size() + "\n");
+
         // podemos ver se existe algum valor na lista
         if (arrayList.contains("Elemento nº 1, 5:"))
             System.out.println("Elemento nº 1, 5: está lá");
@@ -40,10 +41,12 @@ public class ExemploList {
         //podemos descobrirqual o indice do elemento
         int indice = arrayList.indexOf("Elemento nº 1, 5:");
         System.out.println("\nO indice do elemento nº 1, 5' é:" + indice);
+
         // remove um elemneto da lista com remove
         System.out.println("Removendo o elemento nº 1, 5 ");
         arrayList.remove("Elemento nº 1, 5:");
         System.out.println("Lista atualizaada!");
+
         for (String s : arrayList) {
             System.out.println(s);
         }
@@ -51,9 +54,11 @@ public class ExemploList {
         System.out.println("\nRemovendo o ultimo elemento da lista");
         arrayList.remove(arrayList.size() - 1);
         System.out.println("\nLista atualizada");
+
         for (String s : arrayList) {
             System.out.println(s);
         }
+
         System.out.println("\nAdicionando mais elemnetos a lista");
         arrayList.add("Elemnto 5");
         arrayList.add("Elemnto 9");
@@ -61,15 +66,20 @@ public class ExemploList {
         arrayList.add("Elemnto 0");
         arrayList.add("Elemnto 8");
         System.out.println("Mostrando a nova lista");
+
         for (String s : arrayList) {
             System.out.println(s);
         }
+
         // podemos ordenar a lista,desde que a classe dentron dela seja compareble
         Collections.sort(arrayList);
         System.out.println("\nLista ordenada");
+
         for (String s : arrayList) {
             System.out.println(s);
         }
+
+        // Podemos criar um novo arraylist
         List<String> arrayListNovo = new ArrayList<String>(arrayList);
         System.out.println("\nAdicionando o elemento nº 11 a nova lista");
         arrayList.add("Elemento nº 11");

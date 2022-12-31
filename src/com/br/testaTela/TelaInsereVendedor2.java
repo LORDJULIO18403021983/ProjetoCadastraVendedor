@@ -4,7 +4,6 @@ import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
-import java.util.List;
 
 public class TelaInsereVendedor2 {
     /**
@@ -12,7 +11,7 @@ public class TelaInsereVendedor2 {
      * e-mail = juliocasp38@gmail.com
      */
 
-    List<Vendedor> listaVendedor = new ArrayList<>();
+    ArrayList<Vendedor> listaVendedor = new ArrayList<>();
     Vendedor vendedor = new Vendedor();
     private JFrame janelaVendedor;
     private JButton inserir, consultar, limpar, cancelar;
@@ -200,7 +199,7 @@ public class TelaInsereVendedor2 {
 
             // Exibe os dados registrados.
             System.out.println("\n Dados do vendedor ==>\n");
-            for (Vendedor s : listaVendedor) {
+            for (Vendedor s : listaVendedor ) {
                 System.out.println("\nNome: " + s.getNome() + "\nSalário: " + s.getSalario() + "\nEmail: " + s.getEmail() + "\nIdade: " + s.getIdade()
                         + "\nCidade: " + s.getCidade() + "\nEstado: " + s.getEstado());
                 System.out.println("====================================================\n");

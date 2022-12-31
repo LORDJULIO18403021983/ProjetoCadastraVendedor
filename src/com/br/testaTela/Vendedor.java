@@ -1,6 +1,7 @@
 package com.br.testaTela;
 
 public class Vendedor {
+
     private String nome;
     private double salario;
     private String email;
