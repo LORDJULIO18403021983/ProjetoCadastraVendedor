@@ -200,6 +200,7 @@ public class TelaInsereVendedor2 {
             System.out.println("\n Dados do vendedor inseridos com sucesso!!!");
 
             listaVendedor.add(vendedor);
+            System.out.println(listaVendedor);
 
             if (listaVendedor.size() > 2) {
                 try {
