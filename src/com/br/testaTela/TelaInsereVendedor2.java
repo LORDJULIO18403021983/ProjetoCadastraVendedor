@@ -199,10 +199,11 @@ public class TelaInsereVendedor2 {
 
             // Exibe os dados registrados.
             System.out.println("\n Dados do vendedor ==>\n");
-            for (Vendedor s : listaVendedor ) {
+            for (Vendedor s : listaVendedor) {
                 System.out.println("\nNome: " + s.getNome() + "\nSalário: " + s.getSalario() + "\nEmail: " + s.getEmail() + "\nIdade: " + s.getIdade()
                         + "\nCidade: " + s.getCidade() + "\nEstado: " + s.getEstado());
                 System.out.println("====================================================\n");
+
             }
             try {
                 if (listaVendedor == null) {
