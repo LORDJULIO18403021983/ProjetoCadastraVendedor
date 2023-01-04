@@ -17,6 +17,10 @@ public class TelaInsereVendedor2 {
     private JButton inserir, consultar, limpar, cancelar;
     private JLabel labelNome, labelSalario, labelEmail, labelIdade, labelCidade, labelEstado;
     private JTextField textFieldNome, textFieldSalario, textFieldEmail, textFieldIdade, textFieldCidade, textFieldEstado;
+    private JTabbedPane painelComAbasVendedor;
+    private JPanel painelDaJanelaVendedor;
+    private JPanel primeiraAbaVendedor;
+    private JPanel segundaAbaFilme;
     private JComboBox<Object> comboBoxVendedor;
     private String[] cargoDoVendedor = {"VendedorJunior", "VendedorSenior", "VendedorPleno", "VendedorMegaBlaster"};
 
@@ -28,7 +32,20 @@ public class TelaInsereVendedor2 {
     public void iniciaGui() {
         // CRIA A JANELA.
         janelaVendedor = new JFrame("Tela Insere Vendedor");
-        janelaVendedor.setLayout(null);
+        painelComAbasVendedor = new JTabbedPane();
+        painelDaJanelaVendedor = (JPanel) janelaVendedor.getContentPane();
+        primeiraAbaVendedor = new JPanel();
+        segundaAbaFilme = new JPanel();
+
+        // Painel com abas (JTabbledPane).
+        painelComAbasVendedor.add("Vendedor", primeiraAbaVendedor);
+        painelComAbasVendedor.add("Filmes", segundaAbaFilme);
+        painelComAbasVendedor.setBounds(20, 20, 550, 450);
+
+        // ContentPane (JTabbledPane).
+        painelDaJanelaVendedor.setLayout(null);
+        painelDaJanelaVendedor.add(painelComAbasVendedor);
+        primeiraAbaVendedor.setLayout(null);
 
         // Configurando os Label's
         labelNome = new JLabel("Nome:");
@@ -45,12 +62,12 @@ public class TelaInsereVendedor2 {
         labelEstado.setBounds(50, 240, 100, 20);
 
         // Adiciona os elementos label's na janela.
-        janelaVendedor.getContentPane().add(labelNome);
-        janelaVendedor.getContentPane().add(labelSalario);
-        janelaVendedor.getContentPane().add(labelEmail);
-        janelaVendedor.getContentPane().add(labelIdade);
-        janelaVendedor.getContentPane().add(labelCidade);
-        janelaVendedor.getContentPane().add(labelEstado);
+        primeiraAbaVendedor.add(labelNome);
+        primeiraAbaVendedor.add(labelSalario);
+        primeiraAbaVendedor.add(labelEmail);
+        primeiraAbaVendedor.add(labelIdade);
+        primeiraAbaVendedor.add(labelCidade);
+        primeiraAbaVendedor.add(labelEstado);
 
         // Configurando os TextField's
         textFieldNome = new JTextField(null, "Nome ...", 40);
@@ -67,12 +84,12 @@ public class TelaInsereVendedor2 {
         textFieldEstado.setBounds(250, 240, 250, 20);
 
         // Adiciona os elementos TextField na janela.
-        janelaVendedor.getContentPane().add(textFieldNome);
-        janelaVendedor.getContentPane().add(textFieldSalario);
-        janelaVendedor.getContentPane().add(textFieldEmail);
-        janelaVendedor.getContentPane().add(textFieldIdade);
-        janelaVendedor.getContentPane().add(textFieldCidade);
-        janelaVendedor.getContentPane().add(textFieldEstado);
+        primeiraAbaVendedor.add(textFieldNome);
+        primeiraAbaVendedor.add(textFieldSalario);
+        primeiraAbaVendedor.add(textFieldEmail);
+        primeiraAbaVendedor.add(textFieldIdade);
+        primeiraAbaVendedor.add(textFieldCidade);
+        primeiraAbaVendedor.add(textFieldEstado);
 
         // Configurando os bostões.
         inserir = new JButton("Inserir");
@@ -92,10 +109,10 @@ public class TelaInsereVendedor2 {
         cancelar.setBounds(340, 340, 95, 30);
 
         // Adicionando os botões a janela.
-        janelaVendedor.add(inserir);
-        janelaVendedor.add(consultar);
-        janelaVendedor.add(limpar);
-        janelaVendedor.add(cancelar);
+        primeiraAbaVendedor.add(inserir);
+        primeiraAbaVendedor.add(consultar);
+        primeiraAbaVendedor.add(limpar);
+        primeiraAbaVendedor.add(cancelar);
 
         //Cria o Menu retrátil.
         comboBoxVendedor = new JComboBox<>(cargoDoVendedor);
@@ -106,12 +123,12 @@ public class TelaInsereVendedor2 {
         comboBoxVendedor.setMaximumRowCount(4);
 
         // Adiciona no painel
-        janelaVendedor.add(comboBoxVendedor);
+        primeiraAbaVendedor.add(comboBoxVendedor);
 
         // CONFIGURANDO A JANELA
-        janelaVendedor.setSize(600, 500);
+        janelaVendedor.setSize(650, 550);
         janelaVendedor.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        janelaVendedor.setResizable(false);
+        janelaVendedor.setResizable(true);
         janelaVendedor.setVisible(true);
         janelaVendedor.setLayout(null);
     }
