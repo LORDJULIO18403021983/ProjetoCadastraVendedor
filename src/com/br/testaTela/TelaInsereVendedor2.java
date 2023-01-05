@@ -12,8 +12,7 @@ public class TelaInsereVendedor2 {
      * e-mail = juliocasp38@gmail.com
      */
     ArrayList<Vendedor> listaVendedor = new ArrayList<>();
-    List labelLista = new List(2,true);
-    Vendedor vendedor = new Vendedor();
+    Vendedor vetorVendedor[] = new Vendedor[2];
     private JFrame janelaVendedor;
     private JButton inserir, consultar, limpar, cancelar;
     private JLabel labelNome, labelSalario, labelEmail, labelIdade, labelCidade, labelEstado;
@@ -221,6 +220,7 @@ public class TelaInsereVendedor2 {
     public class InserirListener implements ActionListener {
         public void actionPerformed(ActionEvent event) {
 
+            Vendedor vendedor = new Vendedor();
             try {
                 if (textFieldNome.getText().isEmpty()) {
                     JOptionPane.showMessageDialog(null, "O nome não pode estar vazio!", "Informação", JOptionPane.ERROR_MESSAGE);
@@ -284,10 +284,14 @@ public class TelaInsereVendedor2 {
             }
             System.out.println("\n Dados do vendedor inseridos com sucesso!!!");
 
-            listaVendedor.add(vendedor);
-            System.out.println(listaVendedor);
+            for (int i = 0; i < vetorVendedor.length; i++) {
+                vetorVendedor[i] = vendedor;
+            }
 
-            if (listaVendedor.size() > 2) {
+            listaVendedor.add(vendedor);
+            System.out.println(listaVendedor.size());
+
+            if (vetorVendedor.length > 2) {
                 try {
                     JOptionPane.showMessageDialog(null, "Numero máximo de cadastro!", "Informação", JOptionPane.ERROR_MESSAGE);
                 } catch (ArrayIndexOutOfBoundsException erro) {
@@ -301,13 +305,13 @@ public class TelaInsereVendedor2 {
         public void actionPerformed(ActionEvent e) {
 
             // Exibe os dados registrados.
-            System.out.println("\n Dados do vendedor ==>\n");
-            for (Vendedor s : listaVendedor) {
-                System.out.println("\nNome: " + s.getNome() + "\nSalário: " + s.getSalario() + "\nEmail: " + s.getEmail() + "\nIdade: " + s.getIdade()
-                        + "\nCidade: " + s.getCidade() + "\nEstado: " + s.getEstado());
-                System.out.println("====================================================\n");
+            System.out.println("\n Dados do vendedor ==>\n" + listaVendedor);
+//            for (Vendedor s : listaVendedor) {
+//                System.out.println("\nNome: " + s.getNome() + "\nSalário: " + s.getSalario() + "\nEmail: " + s.getEmail() + "\nIdade: " + s.getIdade()
+//                        + "\nCidade: " + s.getCidade() + "\nEstado: " + s.getEstado());
+//                System.out.println("====================================================\n");
+//            }
 
-            }
             try {
                 if (listaVendedor == null) {
                     JOptionPane.showMessageDialog(null, "Arquivo não encontrado!");
