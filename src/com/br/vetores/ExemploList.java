@@ -93,5 +93,6 @@ public class ExemploList {
         for(String s: arrayListNovo){
             System.out.println(s);
         }
+
     }
 }
