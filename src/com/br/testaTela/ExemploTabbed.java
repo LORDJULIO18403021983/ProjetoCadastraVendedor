@@ -23,12 +23,12 @@ public class ExemploTabbed {
         primeiraAba = new JPanel();
         segundaAba = new JPanel();
         terceiraAba = new JPanel();
-        // Painel com abas (JTabbedPane).
+        // Adiciona o Painel com abas (JTabbedPane).
         painelComAbas.addTab("Guia 1", primeiraAba);
         painelComAbas.addTab("Guia 2", segundaAba);
         painelComAbas.addTab("Guia 3", terceiraAba);
         painelComAbas.setBounds(14, 21, 342, 220);
-        // ContentPane.
+        // Carrega o ContentPane.
         painelDaJanela.setLayout(null);
         painelDaJanela.add(painelComAbas);
         // Insere texto na aba.
@@ -39,5 +39,6 @@ public class ExemploTabbed {
         janela.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         janela.setSize(390, 300);
         janela.setVisible(true);
+        janela.setLayout(null);
     }
 }
