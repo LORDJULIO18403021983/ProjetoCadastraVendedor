@@ -12,6 +12,7 @@ public class TelaInsereVendedor2 {
      * e-mail = juliocasp38@gmail.com
      */
     ArrayList<Vendedor> listaVendedor = new ArrayList<>();
+    List labelLista = new List(2,true);
     Vendedor vendedor = new Vendedor();
     private JFrame janelaVendedor;
     private JButton inserir, consultar, limpar, cancelar;
