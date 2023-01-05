@@ -31,7 +31,7 @@ public class TelaInsereVendedor2 {
     private JCheckBox checkBoxOutro;
     private JButton botaoResposta;
     private JComboBox<Object> comboBoxVendedor;
-    private String[] cargoDoVendedor = {"VendedorJunior", "VendedorSenior", "VendedorPleno", "VendedorMegaBlaster"};
+    private String[] cargoDoVendedor = {"VendedorJunior", "VendedorSenior", "VendedorPleno", "VendedorGeral"};
 
     public static void main(String[] args) {
         TelaInsereVendedor2 aplicativo = new TelaInsereVendedor2();

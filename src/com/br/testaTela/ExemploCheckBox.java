@@ -84,5 +84,6 @@ public class ExemploCheckBox {
         janela.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         janela.setSize(390, 300);
         janela.setVisible(true);
+        janela.setLayout(null);
     }
 }
