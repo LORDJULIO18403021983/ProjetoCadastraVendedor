@@ -1,6 +1,7 @@
 package com.br.testaTela;
 
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
@@ -10,7 +11,6 @@ public class TelaInsereVendedor2 {
      * Desenvolvido por Julio_Abreu
      * e-mail = juliocasp38@gmail.com
      */
-
     ArrayList<Vendedor> listaVendedor = new ArrayList<>();
     Vendedor vendedor = new Vendedor();
     private JFrame janelaVendedor;
@@ -21,6 +21,15 @@ public class TelaInsereVendedor2 {
     private JPanel painelDaJanelaVendedor;
     private JPanel primeiraAbaVendedor;
     private JPanel segundaAbaFilme;
+    private JPanel terceiraAbaLocacao;
+    private JLabel labelEscolha;
+    private JLabel labelResposta;
+    private JCheckBox checkBoxFiccao;
+    private JCheckBox checkBoxAcao;
+    private JCheckBox checkBoxTerror;
+    private JCheckBox checkBoxComedia;
+    private JCheckBox checkBoxOutro;
+    private JButton botaoResposta;
     private JComboBox<Object> comboBoxVendedor;
     private String[] cargoDoVendedor = {"VendedorJunior", "VendedorSenior", "VendedorPleno", "VendedorMegaBlaster"};
 
@@ -30,22 +39,26 @@ public class TelaInsereVendedor2 {
     }
 
     public void iniciaGui() {
-        // CRIA A JANELA.
+        // Cria a janela.
         janelaVendedor = new JFrame("Tela Insere Vendedor");
         painelComAbasVendedor = new JTabbedPane();
         painelDaJanelaVendedor = (JPanel) janelaVendedor.getContentPane();
         primeiraAbaVendedor = new JPanel();
         segundaAbaFilme = new JPanel();
+        terceiraAbaLocacao = new JPanel();
 
-        // Painel com abas (JTabbledPane).
+        // Adiciona as Abas na janela.
         painelComAbasVendedor.add("Vendedor", primeiraAbaVendedor);
         painelComAbasVendedor.add("Filmes", segundaAbaFilme);
+        painelComAbasVendedor.add("Locação", terceiraAbaLocacao);
         painelComAbasVendedor.setBounds(20, 20, 550, 450);
 
-        // ContentPane (JTabbledPane).
-        painelDaJanelaVendedor.setLayout(null);
+        // Carrega o ContentPane no (JTabbledPane).
         painelDaJanelaVendedor.add(painelComAbasVendedor);
+        painelDaJanelaVendedor.setLayout(null);
         primeiraAbaVendedor.setLayout(null);
+        segundaAbaFilme.setLayout(null);
+        terceiraAbaLocacao.setLayout(null);
 
         // Configurando os Label's
         labelNome = new JLabel("Nome:");
@@ -118,12 +131,83 @@ public class TelaInsereVendedor2 {
         comboBoxVendedor = new JComboBox<>(cargoDoVendedor);
         comboBoxVendedor.setSelectedIndex(-1);
         comboBoxVendedor.setBounds(40, 285, 200, 30);
-
         // Numero de colunas visiveis
         comboBoxVendedor.setMaximumRowCount(4);
-
         // Adiciona no painel
         primeiraAbaVendedor.add(comboBoxVendedor);
+
+        // Configurando os label do checkBox
+        labelEscolha = new JLabel();
+        labelEscolha.setForeground(Color.RED);
+        labelEscolha.setText("Escolha o Gênero de Filme:");
+        labelEscolha.setBounds(42, 15, 208, 18);
+        // Configurando o label resposta do checkBox
+        labelResposta = new JLabel();
+        labelResposta.setForeground(Color.BLUE);
+        labelResposta.setText("Resposta");
+        labelResposta.setBounds(42, 240, 300, 18);
+        // Configurando o checkBoxFiccao
+        checkBoxFiccao = new JCheckBox();
+        checkBoxFiccao.setText("Ficção");
+        checkBoxFiccao.setSelected(true);
+        checkBoxFiccao.setBounds(42, 44, 145, 24);
+        // Configurando o checkBoxAcao
+        checkBoxAcao = new JCheckBox();
+        checkBoxAcao.setText("Ação");
+        checkBoxAcao.setBounds(42, 64, 154, 24);
+        // Configurando o checkBoxTerror
+        checkBoxTerror = new JCheckBox();
+        checkBoxTerror.setText("Terror");
+        checkBoxTerror.setSelected(true);
+        checkBoxTerror.setBounds(42, 84, 157, 24);
+        // Configurando o checkBoxComédia
+        checkBoxComedia = new JCheckBox();
+        checkBoxComedia.setText("Comédia");
+        checkBoxComedia.setBounds(42, 104, 154, 24);
+        // Configurando o checkBoxOutro
+        checkBoxOutro = new JCheckBox();
+        checkBoxOutro.setText("Outro");
+        checkBoxOutro.setBounds(42, 124, 154, 24);
+        // Configura o BotaoResposta.
+        botaoResposta = new JButton();
+        botaoResposta.setText("Verificar");
+        botaoResposta.setBounds(42, 196, 83, 28);
+        // Cria um listener para o botãoResposta.
+        botaoResposta.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                String resposta = "";
+                if (checkBoxFiccao.isSelected()) {
+                    resposta += checkBoxFiccao.getText();
+                }
+                if (checkBoxAcao.isSelected()) {
+                    resposta += checkBoxAcao.getText();
+                }
+                if (checkBoxTerror.isSelected()) {
+                    resposta += checkBoxTerror.getText();
+                }
+                if (checkBoxComedia.isSelected()) {
+                    resposta += checkBoxComedia.getText();
+                }
+                if (checkBoxOutro.isSelected()) {
+                    resposta += checkBoxOutro.getText();
+                }
+                if (resposta.isEmpty()) {
+                    resposta = "Nenhum item selecionado";
+                }
+                // Escreve a resposta no rótulo azul.
+                labelResposta.setText(resposta);
+                resposta = "";
+            }
+        });
+        // Adiciona os checkBox e label's à segundaAbaFilme
+        segundaAbaFilme.add(labelEscolha);
+        segundaAbaFilme.add(labelResposta);
+        segundaAbaFilme.add(checkBoxFiccao);
+        segundaAbaFilme.add(checkBoxAcao);
+        segundaAbaFilme.add(checkBoxTerror);
+        segundaAbaFilme.add(checkBoxComedia);
+        segundaAbaFilme.add(checkBoxOutro);
+        segundaAbaFilme.add(botaoResposta);
 
         // CONFIGURANDO A JANELA
         janelaVendedor.setSize(650, 550);
