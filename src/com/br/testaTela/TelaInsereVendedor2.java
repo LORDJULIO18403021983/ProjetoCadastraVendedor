@@ -22,14 +22,23 @@ public class TelaInsereVendedor2 {
     private JPanel primeiraAbaVendedor;
     private JPanel segundaAbaFilme;
     private JPanel terceiraAbaLocacao;
-    private JLabel labelEscolha;
-    private JLabel labelResposta;
+    // Variáveis do checkBox.
+    private JLabel labelEscolhaTemaDoFilme;
+    private JLabel labelRespostaTemaDoFilme;
     private JCheckBox checkBoxFiccao;
     private JCheckBox checkBoxAcao;
     private JCheckBox checkBoxTerror;
     private JCheckBox checkBoxComedia;
     private JCheckBox checkBoxOutro;
     private JButton botaoResposta;
+    // Variáveis do radioButton.
+    private JLabel labelEscolhaSexo;
+    private JLabel labelRespostaSexo;
+    private JRadioButton radioButtonMasculino;
+    private JRadioButton radioButtonFeminino;
+    private JButton botaoVerificaSexo;
+    private ButtonGroup buttonGroupRadio;
+    // Variáveis do comboBox.
     private JComboBox<Object> comboBoxVendedor;
     private String[] cargoDoVendedor = {"VendedorJunior", "VendedorSenior", "VendedorPleno", "VendedorGeral"};
 
@@ -136,16 +145,71 @@ public class TelaInsereVendedor2 {
         // Adiciona no painel
         primeiraAbaVendedor.add(comboBoxVendedor);
 
+        // Cria os label do radioButton.
+        labelEscolhaSexo = new JLabel();
+        labelEscolhaSexo.setHorizontalTextPosition(SwingConstants.CENTER);
+        labelEscolhaSexo.setForeground(Color.RED);
+        labelEscolhaSexo.setText("Escolha o sexo:");
+        labelEscolhaSexo.setBounds(300, 18, 230, 18);
+        // Cria os label resposta do radioButton.
+        labelRespostaSexo = new JLabel();
+        labelRespostaSexo.setHorizontalTextPosition(SwingConstants.CENTER);
+        labelRespostaSexo.setForeground(Color.BLUE);
+        labelRespostaSexo.setText("Resposta:");
+        labelRespostaSexo.setBounds(300, 240, 300, 18);
+        // Cria o radioButton masculino.
+        radioButtonMasculino = new JRadioButton();
+        radioButtonMasculino.setText("Masculino");
+        radioButtonMasculino.setSelected(true);
+        radioButtonMasculino.setBounds(300, 50, 100, 24);
+        // Cria os radioButton feminino.
+        radioButtonFeminino = new JRadioButton();
+        radioButtonFeminino.setText("Feminino");
+        radioButtonFeminino.setBounds(300, 75, 100, 24);
+        // Cria o botão verifica sexo.
+        botaoVerificaSexo = new JButton();
+        botaoVerificaSexo.setText("Mostrar");
+        botaoVerificaSexo.setBounds(300, 196, 83, 28);
+        //Cria o objeto do grupo de botões.
+        buttonGroupRadio = new ButtonGroup();
+        // Adiciona os botões do grupo.
+        buttonGroupRadio.add(radioButtonFeminino);
+        buttonGroupRadio.add(radioButtonMasculino);
+        // Adiciona os componentes radioButton's à segundaAbaFilme.
+        segundaAbaFilme.add(labelEscolhaSexo);
+        segundaAbaFilme.add(labelRespostaSexo);
+        segundaAbaFilme.add(radioButtonFeminino);
+        segundaAbaFilme.add(radioButtonMasculino);
+        segundaAbaFilme.add(botaoVerificaSexo);
+        // Cria um Listener do botãoVerificaSexo.
+        botaoVerificaSexo.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String respostaSexo = "";
+                if (radioButtonFeminino.isSelected()) {
+                    respostaSexo += radioButtonFeminino.getText();
+                }
+                if (radioButtonMasculino.isSelected()) {
+                    respostaSexo += radioButtonMasculino.getText();
+                }
+                // troca a cor da fonte do rotulo para vermelho
+                labelRespostaSexo.setForeground(Color.RED);
+                // Escreve a resposta no rótulo azul.
+                labelRespostaSexo.setText(respostaSexo);
+                respostaSexo = "";
+            }
+        });
+
         // Configurando os label do checkBox
-        labelEscolha = new JLabel();
-        labelEscolha.setForeground(Color.RED);
-        labelEscolha.setText("Escolha o Gênero de Filme:");
-        labelEscolha.setBounds(42, 15, 208, 18);
+        labelEscolhaTemaDoFilme = new JLabel();
+        labelEscolhaTemaDoFilme.setForeground(Color.RED);
+        labelEscolhaTemaDoFilme.setText("Escolha o Gênero de Filme:");
+        labelEscolhaTemaDoFilme.setBounds(42, 15, 208, 18);
         // Configurando o label resposta do checkBox
-        labelResposta = new JLabel();
-        labelResposta.setForeground(Color.BLUE);
-        labelResposta.setText("Resposta");
-        labelResposta.setBounds(42, 240, 300, 18);
+        labelRespostaTemaDoFilme = new JLabel();
+        labelRespostaTemaDoFilme.setForeground(Color.BLUE);
+        labelRespostaTemaDoFilme.setText("Resposta");
+        labelRespostaTemaDoFilme.setBounds(42, 240, 300, 18);
         // Configurando o checkBoxFiccao
         checkBoxFiccao = new JCheckBox();
         checkBoxFiccao.setText("Ficção");
@@ -172,6 +236,16 @@ public class TelaInsereVendedor2 {
         botaoResposta = new JButton();
         botaoResposta.setText("Verificar");
         botaoResposta.setBounds(42, 196, 83, 28);
+
+        // Adiciona os checkBox e label's à segundaAbaFilme
+        segundaAbaFilme.add(labelEscolhaTemaDoFilme);
+        segundaAbaFilme.add(labelRespostaTemaDoFilme);
+        segundaAbaFilme.add(checkBoxFiccao);
+        segundaAbaFilme.add(checkBoxAcao);
+        segundaAbaFilme.add(checkBoxTerror);
+        segundaAbaFilme.add(checkBoxComedia);
+        segundaAbaFilme.add(checkBoxOutro);
+        segundaAbaFilme.add(botaoResposta);
         // Cria um listener para o botãoResposta.
         botaoResposta.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
@@ -195,19 +269,10 @@ public class TelaInsereVendedor2 {
                     resposta = "Nenhum item selecionado";
                 }
                 // Escreve a resposta no rótulo azul.
-                labelResposta.setText(resposta);
+                labelRespostaTemaDoFilme.setText(resposta);
                 resposta = "";
             }
         });
-        // Adiciona os checkBox e label's à segundaAbaFilme
-        segundaAbaFilme.add(labelEscolha);
-        segundaAbaFilme.add(labelResposta);
-        segundaAbaFilme.add(checkBoxFiccao);
-        segundaAbaFilme.add(checkBoxAcao);
-        segundaAbaFilme.add(checkBoxTerror);
-        segundaAbaFilme.add(checkBoxComedia);
-        segundaAbaFilme.add(checkBoxOutro);
-        segundaAbaFilme.add(botaoResposta);
 
         // CONFIGURANDO A JANELA
         janelaVendedor.setSize(650, 550);
