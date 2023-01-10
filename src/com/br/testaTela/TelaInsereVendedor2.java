@@ -349,7 +349,7 @@ public class TelaInsereVendedor2 {
             }
 
             listaVendedor.add(vendedor);
-            System.out.println("Exemplo de lista: " + listaVendedor);
+            System.out.println("Exemplo de lista:(refeência) " + listaVendedor);
 
             for (Vendedor s : listaVendedor) {
                 System.out.println("\n Dados do vendedor inseridos com sucesso ===> " + s);
