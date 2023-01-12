@@ -169,9 +169,12 @@ public class TelaInsereVendedor extends JFrame {
                 JOptionPane.showMessageDialog(null, "Erro no campo estado.", "ERRO", JOptionPane.ERROR_MESSAGE);
             }
             System.out.println("\n Dados do vendedor inseridos com sucesso!!!");
-            arrayVendedor[i] = v2;
 
-            if (i > 2) {
+            for (int j = 0; j < arrayVendedor.length; j++) {
+            arrayVendedor[j] = v2;
+            }
+
+            if (arrayVendedor.length > 2) {
                 try {
                     JOptionPane.showMessageDialog(null, "Numero máximo de cadastro!", "Informação", JOptionPane.ERROR_MESSAGE);
                 } catch (ArrayIndexOutOfBoundsException erro) {
@@ -186,11 +189,10 @@ public class TelaInsereVendedor extends JFrame {
 
             // Exibe os dados registrados.
             System.out.println("\n Dados do vendedor ==>");
-            arrayVendedor[i] = v2;
-            v2.exibirDados();
+            arrayVendedor[i].exibirDados();
             System.out.println("====================================================\n");
             try {
-                if (arrayVendedor[i] == null) {
+                if (arrayVendedor.length < 0) {
                     JOptionPane.showMessageDialog(null, "Arquivo não encontrado!");
                 }
             } catch (Exception erro) {

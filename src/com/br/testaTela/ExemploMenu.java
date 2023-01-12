@@ -12,6 +12,7 @@ public class ExemploMenu {
         //criação dos itens do menu
         JMenu menu01 = new JMenu("Menu 01.");
         JMenu menu02 = new JMenu("Menu 02.");
+
         JMenuItem itemMenu = new JMenuItem("Item");
 
         // adiciona os menus a barra
