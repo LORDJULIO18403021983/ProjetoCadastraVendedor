@@ -50,6 +50,8 @@ public class ExCamposTexto {
                 // verifica login e senha
                 if (txtLogin.getText().equals("programador") && new String(txtSenha.getPassword()).equals("java")) {
                     JOptionPane.showMessageDialog(null, "Login correto.");
+                } else{
+                    JOptionPane.showMessageDialog(null, "Login incorreto.\nverifique login e senha novamente!!!");
                 }
             }
         });
