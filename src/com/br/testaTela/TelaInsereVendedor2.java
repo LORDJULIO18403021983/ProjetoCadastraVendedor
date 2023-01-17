@@ -12,7 +12,6 @@ public class TelaInsereVendedor2 {
      * e-mail = juliocasp38@gmail.com
      */
     ArrayList<Vendedor> listaVendedor = new ArrayList<>();
-    Vendedor vetorVendedor[] = new Vendedor[2];
     private JFrame janelaVendedor;
     private JButton inserir, consultar, limpar, cancelar;
     private JLabel labelNome, labelSalario, labelEmail, labelIdade, labelCidade, labelEstado;
@@ -349,7 +348,7 @@ public class TelaInsereVendedor2 {
             }
 
             listaVendedor.add(vendedor);
-            System.out.println("Exemplo de lista:(refeência) " + listaVendedor);
+            System.out.println("Exemplo de lista:(referência) " + listaVendedor);
 
             for (Vendedor s : listaVendedor) {
                 System.out.println("\n Dados do vendedor inseridos com sucesso ===> " + s);

@@ -8,6 +8,9 @@ public class TestaHashSet {
 
         lista.add("A Era do gelo");
         lista.add("Madagascar");
+        lista.add("A Ilha");
+        lista.add("O procurado");
+        lista.add("De volta para o futuro");
         lista.add("A Era do gelo");
         lista.add("A nova onda do imperador");
 

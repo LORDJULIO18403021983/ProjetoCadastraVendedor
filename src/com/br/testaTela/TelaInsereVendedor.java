@@ -170,8 +170,9 @@ public class TelaInsereVendedor extends JFrame {
             }
             System.out.println("\n Dados do vendedor inseridos com sucesso!!!");
 
-            for (int j = 0; j < arrayVendedor.length; j++) {
-            arrayVendedor[j] = v2;
+            arrayVendedor[i] = v2;
+            for (int i = 0; i < arrayVendedor.length; i++) {
+                System.out.println(arrayVendedor);
             }
 
             if (arrayVendedor.length > 2) {
