@@ -199,7 +199,7 @@ public class TelaCadastraVendedor extends ModeloVendedor {
                 gravador.println("Email : " + textFieldEmail.getText().trim());
                 gravador.println("Idade: " + textFieldIdade.getText().trim());
                 gravador.println("Cidade: " + textFieldCidade.getText().trim().toUpperCase());
-                gravador.println("Estado: " + textFieldEstado.getText().trim());
+                gravador.println("Estado: " + textFieldEstado.getText().trim().toUpperCase());
                 gravador.close();
                 System.out.println("Dados inseridos com sucesso!!!\n");
             } catch (FileNotFoundException error) {
