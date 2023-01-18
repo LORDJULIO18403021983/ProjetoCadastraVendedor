@@ -1,0 +1,16 @@
+
+Dados do vendedor: 
+Nome: JULIO
+Salário: 12400
+Email : julio123@gmail.com
+Idade: 39
+Cidade: JANDIRA
+Estado: são paulo
+
+Dados do vendedor: 
+Nome: VALERIA ABREU
+Salário: 35000
+Email : valeria321@gmail.com
+Idade: 33
+Cidade: JANDIRA
+Estado: são paulo

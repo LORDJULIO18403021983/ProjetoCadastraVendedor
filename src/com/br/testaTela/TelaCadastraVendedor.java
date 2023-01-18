@@ -3,13 +3,11 @@ package com.br.testaTela;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.PrintStream;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
+import java.util.Scanner;
 
 public class TelaCadastraVendedor extends ModeloVendedor {
 
@@ -192,7 +190,7 @@ public class TelaCadastraVendedor extends ModeloVendedor {
 
             //SALVANDO EM .TXT
             try {
-                File arquivo = new File("cadastroVendedor.txt");
+                File arquivo = new File("cadastraVendedor.txt");
                 FileOutputStream arquivoOutput = new FileOutputStream(arquivo, true);
                 PrintStream gravador = new PrintStream(arquivoOutput);
                 gravador.println("\nDados do vendedor: ");
@@ -209,7 +207,18 @@ public class TelaCadastraVendedor extends ModeloVendedor {
             } catch (Exception e) {
                 System.out.println("Erro na gravação.");
             }
-
+            //LENDO UM ARQUIVO .TXT
+            try {
+                Scanner leitor = new Scanner(new FileReader("cadastraVendedor.txt"));
+                System.out.println("\nDados do cliente ==> ");
+                while (leitor.hasNext()) {
+                    String line = leitor.nextLine();
+                    System.out.println(line);
+                }
+                leitor.close();
+            } catch (FileNotFoundException e) {
+                JOptionPane.showMessageDialog(null, "ERROR! \n Arquivo não encontrado. \n Não foi possivel realizar a leitura.");
+            }
         }
     }
 
@@ -230,6 +239,19 @@ public class TelaCadastraVendedor extends ModeloVendedor {
                 }
             } catch (Exception erro) {
                 JOptionPane.showMessageDialog(null, " Verifique se há algum registro salvo!");
+            }
+
+            //LENDO UM ARQUIVO .TXT
+            try {
+                Scanner leitor = new Scanner(new FileReader("cadastraVendedor.txt"));
+                System.out.println("\nDados do cliente ==> ");
+                while (leitor.hasNext()) {
+                    String line = leitor.nextLine();
+                    System.out.println(line);
+                }
+                leitor.close();
+            } catch (FileNotFoundException erro) {
+                JOptionPane.showMessageDialog(null, "ERROR! \n Arquivo não encontrado. \n Não foi possivel realizar a leitura.");
             }
         }
     }
