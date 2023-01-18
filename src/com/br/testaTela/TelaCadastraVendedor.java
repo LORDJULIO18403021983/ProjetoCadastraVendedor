@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
-public class TelaCadastraVendedor {
+public class TelaCadastraVendedor extends ModeloVendedor {
 
     /**
      * Desenvolvido por Julio_Abreu
@@ -197,6 +197,7 @@ public class TelaCadastraVendedor {
                 System.out.println("\nNome: " + modeloVendedor.getNome() + "\nSalário: " + modeloVendedor.getSalario() + "\nEmail: " + modeloVendedor.getEmail() + "\nIdade: "
                         + modeloVendedor.getIdade() + "\nCidade: " + modeloVendedor.getCidade() + "\nEstado: " + modeloVendedor.getEstado());
             }
+            System.out.println(vendedorList.size());
             System.out.println("====================================================\n");
             try {
                 if (vendedorList.size() == 0) {
