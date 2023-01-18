@@ -6,7 +6,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
-public class TelaInsereVendedor2 {
+public class TelaInsereVendedor2 extends Vendedor{
     /**
      * Desenvolvido por Julio_Abreu
      * e-mail = juliocasp38@gmail.com
@@ -350,10 +350,6 @@ public class TelaInsereVendedor2 {
             listaVendedor.add(vendedor);
             System.out.println("Exemplo de lista:(referência) " + listaVendedor);
 
-            for (Vendedor s : listaVendedor) {
-                System.out.println("\n Dados do vendedor inseridos com sucesso ===> " + s);
-            }
-
             if (listaVendedor.size() > 2) {
                 try {
                     JOptionPane.showMessageDialog(null, "Numero máximo de cadastro!", "Informação", 2);
@@ -370,9 +366,9 @@ public class TelaInsereVendedor2 {
 
             // Exibe os dados registrados.
             System.out.println("\n Dados do vendedor (numero de referência do Objeto) => " + listaVendedor);
-            for (Vendedor s : listaVendedor) {
-                System.out.println("\nNome: " + s.getNome() + "\nSalário: " + s.getSalario() + "\nEmail: " + s.getEmail() + "\nIdade: " + s.getIdade()
-                        + "\nCidade: " + s.getCidade() + "\nEstado: " + s.getEstado());
+            for (Vendedor vendedor : listaVendedor) {
+                System.out.println("\nNome: " + vendedor.getNome() + "\nSalário: " + vendedor.getSalario() + "\nEmail: " + vendedor.getEmail() + "\nIdade: " + vendedor.getIdade()
+                        + "\nCidade: " + vendedor.getCidade() + "\nEstado: " + vendedor.getEstado());
                 System.out.println("====================================================\n");
             }
             try {

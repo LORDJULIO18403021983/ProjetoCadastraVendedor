@@ -3,6 +3,10 @@ package com.br.testaTela;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.PrintStream;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
@@ -24,7 +28,7 @@ public class TelaCadastraVendedor extends ModeloVendedor {
         iniciar();
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws FileNotFoundException {
         new TelaCadastraVendedor();
     }
 
@@ -182,9 +186,30 @@ public class TelaCadastraVendedor extends ModeloVendedor {
                 try {
                     JOptionPane.showMessageDialog(null, "Numero máximo de cadastro!", "Informação", JOptionPane.ERROR_MESSAGE);
                 } catch (ArrayIndexOutOfBoundsException erro) {
-                    JOptionPane.showMessageDialog(null, " Possível apenas 5 registro!", "Informação", JOptionPane.ERROR_MESSAGE);
+                    JOptionPane.showMessageDialog(null, " Possível apenas 2 registro!", "Informação", JOptionPane.ERROR_MESSAGE);
                 }
             }
+
+            //SALVANDO EM .TXT
+            try {
+                File arquivo = new File("cadastroVendedor.txt");
+                FileOutputStream arquivoOutput = new FileOutputStream(arquivo, true);
+                PrintStream gravador = new PrintStream(arquivoOutput);
+                gravador.println("\nDados do vendedor: ");
+                gravador.println("Nome: " + textFieldNome.getText().trim().toUpperCase());
+                gravador.println("Salário: " + textFieldSalario.getText().trim());
+                gravador.println("Email : " + textFieldEmail.getText().trim());
+                gravador.println("Idade: " + textFieldIdade.getText().trim());
+                gravador.println("Cidade: " + textFieldCidade.getText().trim().toUpperCase());
+                gravador.println("Estado: " + textFieldEstado.getText().trim());
+                gravador.close();
+                System.out.println("Dados inseridos com sucesso!!!\n");
+            } catch (FileNotFoundException error) {
+                System.out.println("Arquivo de entrada nao encontrado.");
+            } catch (Exception e) {
+                System.out.println("Erro na gravação.");
+            }
+
         }
     }
 
