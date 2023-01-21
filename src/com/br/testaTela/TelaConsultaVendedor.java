@@ -24,7 +24,7 @@ public class TelaConsultaVendedor {
             while (leitor.hasNext()) {
                 String line = leitor.nextLine();
                 System.out.println(line);
-                JOptionPane.showMessageDialog(null, line, "Informação", 2);
+                JOptionPane.showMessageDialog(null, line);
             }
             leitor.close();
         } catch (FileNotFoundException erro) {
