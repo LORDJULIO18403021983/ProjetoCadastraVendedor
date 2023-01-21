@@ -6,7 +6,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
-public class TelaInsereVendedor2 extends Vendedor{
+public class TelaInsereVendedor2 extends Vendedor {
     /**
      * Desenvolvido por Julio_Abreu
      * e-mail = juliocasp38@gmail.com
@@ -349,6 +349,9 @@ public class TelaInsereVendedor2 extends Vendedor{
 
             listaVendedor.add(vendedor);
             System.out.println("Exemplo de lista:(referência) " + listaVendedor);
+            System.out.println(comboBoxVendedor.getSelectedIndex());
+            System.out.println(comboBoxVendedor.getSelectedItem());
+            System.out.println(cargoDoVendedor);
 
             if (listaVendedor.size() > 2) {
                 try {
@@ -371,6 +374,9 @@ public class TelaInsereVendedor2 extends Vendedor{
                         + "\nCidade: " + vendedor.getCidade() + "\nEstado: " + vendedor.getEstado());
                 System.out.println("====================================================\n");
             }
+            System.out.println(comboBoxVendedor.getSelectedIndex());
+            System.out.println(comboBoxVendedor.getSelectedItem());
+            System.out.println(cargoDoVendedor);
             try {
                 if (listaVendedor == null) {
                     JOptionPane.showMessageDialog(null, "Arquivo não encontrado!");
