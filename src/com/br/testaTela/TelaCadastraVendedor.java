@@ -21,6 +21,9 @@ public class TelaCadastraVendedor extends ModeloVendedor {
     private JLabel labelNome, labelSalario, labelEmail, labelIdade, labelCidade, labelEstado;
     private JTextField textFieldNome, textFieldSalario, textFieldEmail, textFieldIdade, textFieldCidade, textFieldEstado;
     private List<ModeloVendedor> vendedorList = new ArrayList<>();
+    // Variáveis do comboBox.
+    private JComboBox<Object> comboBoxVendedor;
+    private String[] cargoDoVendedor = {"Vendedor Estagiario", "Vendedor Junior", "Vendedor Pleno", "Vendedor Senior", "Vendedor Master"};
 
     public TelaCadastraVendedor() {
         iniciar();
@@ -102,6 +105,15 @@ public class TelaCadastraVendedor extends ModeloVendedor {
         janelaVendedor.add(consultar);
         janelaVendedor.add(limpar);
         janelaVendedor.add(cancelar);
+
+        //Cria o Menu retrátil.
+        comboBoxVendedor = new JComboBox<>(cargoDoVendedor);
+        comboBoxVendedor.setSelectedIndex(-1);
+        comboBoxVendedor.setBounds(40, 285, 200, 30);
+        // Numero de colunas visiveis
+        comboBoxVendedor.setMaximumRowCount(4);
+        // Adiciona no painel
+        janelaVendedor.add(comboBoxVendedor);
 
         // CONFIGURANDO A JANELA
         janelaVendedor.setSize(600, 500);
@@ -200,6 +212,7 @@ public class TelaCadastraVendedor extends ModeloVendedor {
                 gravador.println("Idade: " + textFieldIdade.getText().trim());
                 gravador.println("Cidade: " + textFieldCidade.getText().trim().toUpperCase());
                 gravador.println("Estado: " + textFieldEstado.getText().trim().toUpperCase());
+                gravador.println("Cargo do vendedor : " + comboBoxVendedor.getSelectedItem());
                 gravador.close();
                 System.out.println("Dados inseridos com sucesso!!!\n");
             } catch (FileNotFoundException error) {

@@ -14,3 +14,21 @@ Email : valeria321@gmail.com
 Idade: 33
 Cidade: JANDIRA
 Estado: são paulo
+
+Dados do vendedor: 
+Nome: ANTONIO ALMEIDA
+Salário: 3579
+Email : antonioalmeida@gmail.com
+Idade: 40
+Cidade: BARUERI
+Estado: SÃO PAULO
+Cargo do vendedor : Vendedor Pleno
+
+Dados do vendedor: 
+Nome: MARIA CARVALHO DA SILVA
+Salário: 7000
+Email : mariacarvalho30@gmail.com
+Idade: 28
+Cidade: SANTANA DE PARNAIBA
+Estado: SÃO PAULO
+Cargo do vendedor : Vendedor Senior
