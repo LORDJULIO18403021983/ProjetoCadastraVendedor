@@ -100,7 +100,7 @@ public class TelaCadastraVendedor extends ModeloVendedor {
         cancelar.setBounds(340, 340, 95, 30);
 
 
-        // configurando os botões
+        // Adicionando os botões
         janelaVendedor.add(inserir);
         janelaVendedor.add(consultar);
         janelaVendedor.add(limpar);

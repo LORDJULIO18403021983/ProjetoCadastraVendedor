@@ -1,0 +1,14 @@
+1,A ERA DO GELO,55.89,Ação/Aventura,Disponivel
+
+2,MISSÃO IMPOSSIVEL 2,159.67,Ação/Aventura,Disponivel
+
+3,MADRE,123.98,Terror,Disponivel
+
+4,A ILHA,77.12,Ficção,Disponivel
+
+5,
+TODO MUNDO EM PÂNICO 3,
+243.99,
+Comédia,
+Indisponivel
+
