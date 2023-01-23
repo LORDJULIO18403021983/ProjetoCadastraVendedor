@@ -41,9 +41,9 @@ public class TelaCadastraFilme {
         labelNome = new JLabel("Nome: ");
         labelNome.setBounds(10, 80, 100, 20);
         labelGenero = new JLabel("Genero: ");
-        labelGenero.setBounds(10, 170, 150, 20);
+        labelGenero.setBounds(10, 140, 150, 20);
         labelDisponivel = new JLabel("Disponibilidade: ");
-        labelDisponivel.setBounds(10, 140, 150, 20);
+        labelDisponivel.setBounds(10, 180, 150, 20);
         labelValor = new JLabel("Valor: ");
         labelValor.setBounds(10, 110, 100, 20);
 
@@ -68,34 +68,34 @@ public class TelaCadastraFilme {
         janelaFilme.getContentPane().add(textFieldValor);
 
         //Cria o Menu retrátil.
-        comboBoxDisponivel = new JComboBox<>(statusFilme);
-        comboBoxDisponivel.setSelectedIndex(-1);
-        comboBoxDisponivel.setBounds(130, 140, 300, 30);
-        comboBoxDisponivel.setMaximumRowCount(2);
-
         comboBoxGenero = new JComboBox<>(generoFilme);
         comboBoxGenero.setSelectedIndex(-1);
-        comboBoxGenero.setBounds(130, 170, 300, 30);
+        comboBoxGenero.setBounds(130, 140, 300, 30);
         comboBoxGenero.setMaximumRowCount(5);
 
+        comboBoxDisponivel = new JComboBox<>(statusFilme);
+        comboBoxDisponivel.setSelectedIndex(-1);
+        comboBoxDisponivel.setBounds(130, 180, 300, 30);
+        comboBoxDisponivel.setMaximumRowCount(2);
+
         // Adicionando os ComboBox's.
-        janelaFilme.getContentPane().add(comboBoxDisponivel);
         janelaFilme.getContentPane().add(comboBoxGenero);
+        janelaFilme.getContentPane().add(comboBoxDisponivel);
 
         // Configurando os bostões.
         botaoIncluir = new JButton("Incluir");
         botaoIncluir.addActionListener(new FilmeListener());
-        botaoIncluir.setBounds(150, 210, 95, 30);
+        botaoIncluir.setBounds(150, 230, 95, 30);
         botaoSair = new JButton("Retornar");
         botaoSair.addActionListener(new FilmeListener());
-        botaoSair.setBounds(250, 210, 95, 30);
+        botaoSair.setBounds(250, 230, 95, 30);
 
         // Adicionando os botões.
         janelaFilme.getContentPane().add(botaoIncluir);
         janelaFilme.getContentPane().add(botaoSair);
 
 
-        janelaFilme.setSize(500, 300);
+        janelaFilme.setSize(500, 350);
         janelaFilme.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         janelaFilme.setVisible(true);
     }
@@ -138,16 +138,18 @@ public class TelaCadastraFilme {
                         File arquivo = new File("cadastraFilme.txt");
                         FileOutputStream arquivoOutput = new FileOutputStream(arquivo, true);
                         PrintStream gravador = new PrintStream(arquivoOutput);
-
-                        gravador.println(Integer.parseInt(textFieldCodigo.getText().trim()) + ",");
-                        gravador.println(textFieldNome.getText().toUpperCase() + ",");
-                        gravador.println(Double.parseDouble(textFieldValor.getText().trim()) + ",");
-                        gravador.println(generoFilme[comboBoxGenero.getSelectedIndex()] + ",");
+                        gravador.println("\nDados do Filme: ");
+                        gravador.print("Codigo: " + Integer.parseInt(textFieldCodigo.getText().trim()) + ",");
+                        gravador.print("Nome : " + textFieldNome.getText().toUpperCase() + ",");
+                        gravador.print("Valor: " + Double.parseDouble(textFieldValor.getText().trim()) + ",");
+                        gravador.print("Genero: " + generoFilme[comboBoxGenero.getSelectedIndex()] + ",");
 
                         if (comboBoxDisponivel.getSelectedIndex() == 0) {
+                            modeloFilme.setDisponivel(true);
                             gravador.println("Disponivel" + "\n");
                         }
                         if (comboBoxDisponivel.getSelectedIndex() == 1) {
+                            modeloFilme.setDisponivel(false);
                             gravador.println("Indisponivel" + "\n");
                         }
                         gravador.close();

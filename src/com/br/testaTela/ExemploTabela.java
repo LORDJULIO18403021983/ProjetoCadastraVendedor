@@ -14,7 +14,8 @@ public class ExemploTabela {
     private JScrollPane painelDeScroll;
     private String[] colunas = new String[]{"UF", "Estado"};
     private String[][] dados = new String[][]{{"SP", "São Paulo"}, {"RJ", "Rio de Janeiro"},
-            {"RN", "Rio Grande do Norte"}, {"PR", "Paraná"}};
+            {"RN", "Rio Grande do Norte"}, {"PR", "Paraná"},
+            {"MG", "Minas Gerais"}, {"RS", "Rio Grande do Sul"}};
 
     public static void main(String[] args) {
         ExemploTabela aplicacao = new ExemploTabela();
@@ -56,18 +57,20 @@ public class ExemploTabela {
         public void actionPerformed(ActionEvent e) {
             adicionaLinha();
         }
+
         /**
          * METODO PARA ADICIONAR UMA NOVA LINHA NA JTABLE.
          */
         public void adicionaLinha() {
             /**OBTEM O MODELO DA JTABLE.*/
             DefaultTableModel modelo = (DefaultTableModel) tabela.getModel();
+            /**ADICIONA UMA NOVA LINHA EM BRANCO NO MODELO.*/
+            modelo.addRow(new String[]{"", ""});
+            modelo.addRow(new String[]{"AL", "Alagoas"});
+            modelo.addRow(new String[]{"AM", "Amazonas"});
             if (tabela.getModel() == null) {
                 JOptionPane.showMessageDialog(null, "O nome não pode estar vazio!", "Informação", JOptionPane.ERROR_MESSAGE);
             }
-            /**ADICIONA UMA NOVA LINHA EM BRANCO NO MODELO.*/
-            modelo.addRow(new String[]{"AL", "Alagoas"});
-            modelo.addRow(new String[]{"AM", "Amazonas"});
         }
     }
 
@@ -75,10 +78,13 @@ public class ExemploTabela {
         public void actionPerformed(ActionEvent e) {
             removeLinhaSelecionada();
         }
+
         public void removeLinhaSelecionada() {
             // Obtem o modelo da JTable
             DefaultTableModel modelo = (DefaultTableModel) tabela.getModel();
             modelo.removeRow(tabela.getSelectedRow());
+            JOptionPane.showMessageDialog(null, "Selecione um campo para excluir");
         }
     }
 }
+

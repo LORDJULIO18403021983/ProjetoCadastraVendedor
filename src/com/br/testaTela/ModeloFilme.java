@@ -10,10 +10,10 @@ public class ModeloFilme {
     @Override
     public String toString() {
         String texto = "Dados do Filme\n";
-        texto += "\nCodigo ........." + this.getCodigo() + "\n";
-        texto += "\nNome ..........." + this.getNome() + "\n";
-        texto += "\nValor .........." + this.getValor() + "\n";
-        texto += "\nDisponivel......" + (disponivel ? "SIM" : "NÃO");
+        texto += "Codigo ........." + this.getCodigo() + "\n";
+        texto += "Nome ..........." + this.getNome() + "\n";
+        texto += "Valor .........." + this.getValor() + "\n";
+        texto += "Disponivel......" + (disponivel ? "SIM" : "NÃO");
         return texto;
     }
 
