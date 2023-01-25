@@ -83,7 +83,6 @@ public class ExemploTabela {
             // Obtem o modelo da JTable
             DefaultTableModel modelo = (DefaultTableModel) tabela.getModel();
             modelo.removeRow(tabela.getSelectedRow());
-            JOptionPane.showMessageDialog(null, "Selecione um campo para excluir");
         }
     }
 }

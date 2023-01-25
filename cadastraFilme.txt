@@ -6,13 +6,9 @@
 
 4,A ILHA,77.12,Ficção,Disponivel
 
-5,
-TODO MUNDO EM PÂNICO 3,
-243.99,
-Comédia,
-Indisponivel
+5,TODO MUNDO EM PÂNICO 3,243.99,Comédia,Indisponivel
 
-9999,NOME DO FILME,999.99,Ficção,Indisponivel
+6,NOME DO FILME,999.99,Ficção,Indisponivel
 
 7,A MALÓCA,999.99,Ação/Aventura,Disponivel
 
@@ -24,7 +20,7 @@ Indisponivel
 
 
 Dados do Filme: 
-Codigo: 11,Nome : MAMA,Valor: 89.99,Genero: Terror,Disponivel
+Codigo: 11,Nome : MÂMA,Valor: 89.99,Genero: Terror,Disponivel
 
 
 Dados do Filme: 
