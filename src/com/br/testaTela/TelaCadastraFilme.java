@@ -138,11 +138,10 @@ public class TelaCadastraFilme {
                         File arquivo = new File("cadastraFilme.txt");
                         FileOutputStream arquivoOutput = new FileOutputStream(arquivo, true);
                         PrintStream gravador = new PrintStream(arquivoOutput);
-                        gravador.println("\nDados do Filme: ");
-                        gravador.print("Codigo: " + Integer.parseInt(textFieldCodigo.getText().trim()) + ",");
-                        gravador.print("Nome : " + textFieldNome.getText().toUpperCase() + ",");
-                        gravador.print("Valor: " + Double.parseDouble(textFieldValor.getText().trim()) + ",");
-                        gravador.print("Genero: " + generoFilme[comboBoxGenero.getSelectedIndex()] + ",");
+                        gravador.print("\nCodigo: " + Integer.parseInt(textFieldCodigo.getText().trim()) + ", ");
+                        gravador.print("Nome : " + textFieldNome.getText().toUpperCase() + ", ");
+                        gravador.print("Valor: " + Double.parseDouble(textFieldValor.getText().trim()) + ", ");
+                        gravador.print("Genero: " + generoFilme[comboBoxGenero.getSelectedIndex()] + ", ");
 
                         if (comboBoxDisponivel.getSelectedIndex() == 0) {
                             modeloFilme.setDisponivel(true);

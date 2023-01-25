@@ -205,14 +205,13 @@ public class TelaCadastraVendedor extends ModeloVendedor {
                 File arquivo = new File("cadastraVendedor.txt");
                 FileOutputStream arquivoOutput = new FileOutputStream(arquivo, true);
                 PrintStream gravador = new PrintStream(arquivoOutput);
-                gravador.println("\nDados do vendedor: ");
-                gravador.println("Nome: " + textFieldNome.getText().trim().toUpperCase());
-                gravador.println("Salário: " + textFieldSalario.getText().trim());
-                gravador.println("Email : " + textFieldEmail.getText().trim());
-                gravador.println("Idade: " + textFieldIdade.getText().trim());
-                gravador.println("Cidade: " + textFieldCidade.getText().trim().toUpperCase());
-                gravador.println("Estado: " + textFieldEstado.getText().trim().toUpperCase());
-                gravador.println("Cargo do vendedor : " + comboBoxVendedor.getSelectedItem());
+                gravador.print("\nNome: " + textFieldNome.getText().trim().toUpperCase() + ", ");
+                gravador.print("Salário: " + textFieldSalario.getText().trim() + ", ");
+                gravador.print("Email : " + textFieldEmail.getText().trim() + ", ");
+                gravador.print("Idade: " + textFieldIdade.getText().trim() + ", ");
+                gravador.print("Cidade: " + textFieldCidade.getText().trim().toUpperCase() + ", ");
+                gravador.print("Estado: " + textFieldEstado.getText().trim().toUpperCase() + ", ");
+                gravador.print("Cargo do vendedor : " + comboBoxVendedor.getSelectedItem() + ".\n");
                 gravador.close();
                 System.out.println("Dados inseridos com sucesso!!!\n");
             } catch (FileNotFoundException error) {
