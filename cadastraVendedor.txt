@@ -1,0 +1,3 @@
+
+Nome: JOSE MAYA, Salário: 7000, Email : jose@gmail.com, Idade: 23, Cidade: BLUMENAL, Estado: SAO PAULO, Cargo do vendedor : Vendedor Master, 
+Nome: BEATRIZ CARVALHO, Salário: 2500, Email : beatriz@gmail.com, Idade: 28, Cidade: ITAQUERA, Estado: SAO PAULO, Cargo do vendedor : Vendedor Junior, 
