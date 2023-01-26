@@ -19,7 +19,7 @@ public class TestaInsereAluno {
             bd = (Connection) DriverManager.getConnection(local, login, senha);
             System.out.println("Conexão estabelecida com sucesso.");
             // Inserindo aluno.
-            String sql = "Insert into aluno "+
+            String sql = "insert into aluno " +
                     "(nome, idade, cidade) values (\"carlos\",25,\"Ourinhos\")";
             Statement comando = bd.createStatement();
             comando.execute(sql);
