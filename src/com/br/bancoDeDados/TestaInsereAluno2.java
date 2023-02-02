@@ -1,17 +1,27 @@
 package com.br.bancoDeDados;
 
+import com.br.bancoDeDados.dao.AlunoDao;
+import com.br.bancoDeDados.util.ConnectionFactory;
+
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.Scanner;
 
 public class TestaInsereAluno2 {
-    public static void main(String[] args) {
-        String local = "jdbc:mysql://localhost/turmas";
-        String login = "root";
-        String senha = "root";
 
+    public TestaInsereAluno2() {
+        iniciar();
+    }
+
+    public static void main(String[] args) {
+        new TestaInsereAluno2();
+    }
+
+    private void iniciar() {
+
+        //conecta com o banco
+        Connection bd = ConnectionFactory.getConnection();
+        // recebe do teclado
         Scanner teclado = new Scanner(System.in);
         System.out.println("Nome do aluno.....: ");
         String nomeDoAluno = teclado.nextLine();
@@ -20,30 +30,18 @@ public class TestaInsereAluno2 {
         System.out.println("Idade do aluno....: ");
         int idadeDoAluno = teclado.nextInt();
 
-        Connection bd = null;
-
         try {
-            Class.forName("com.mysql.jdbc.Driver");
-            System.out.println("Driver carregado com sucesso.");
-            bd = (Connection) DriverManager.getConnection(local, login, senha);
-            System.out.println("Conexão estabelecida com sucesso.");
-            // Inserindo aluno.
-            String sql = "insert into aluno" +
-                    "(nome,idade,cidade)" +
-                    "values (\"" + nomeDoAluno + "\","
-                                 + idadeDoAluno + ",\""
-                                 + cidadeDoAluno + "\")";
-            Statement comando = bd.createStatement();
-            comando.execute(sql);
+            AlunoDao alunoDao = new AlunoDao(bd);
+            alunoDao.inserir(nomeDoAluno, idadeDoAluno, cidadeDoAluno);
             System.out.println("Aluno inserido com sucesso.");
             bd.close();
             System.out.println("Conexão encerrada com sucesso.");
-        } catch (ClassNotFoundException e) {
-            System.out.println("DRIVER DO BANCO NÃO ENCONTRADO.");
-            e.printStackTrace();
+            System.exit(0);
+            System.out.println("Saindo...");
         } catch (SQLException e) {
             System.out.println("ERRO CONECTANDO AO BANCO.");
             e.printStackTrace();
         }
+
     }
 }
