@@ -1,4 +1,4 @@
-package com.br.bancoDeDados.teste;
+package com.br.bancoDeDados;
 
 import java.sql.Connection;
 import java.sql.DriverManager;

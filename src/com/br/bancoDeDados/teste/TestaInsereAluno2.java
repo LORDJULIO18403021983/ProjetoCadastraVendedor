@@ -1,6 +1,7 @@
-package com.br.bancoDeDados;
+package com.br.bancoDeDados.teste;
 
 import com.br.bancoDeDados.dao.AlunoDao;
+import com.br.bancoDeDados.model.Aluno;
 import com.br.bancoDeDados.util.ConnectionFactory;
 
 import java.sql.Connection;
@@ -32,16 +33,17 @@ public class TestaInsereAluno2 {
 
         try {
             AlunoDao alunoDao = new AlunoDao(bd);
-            alunoDao.inserir(nomeDoAluno, idadeDoAluno, cidadeDoAluno);
-            System.out.println("Aluno inserido com sucesso.");
+            Aluno aluno = new Aluno();
+            aluno.setNome(nomeDoAluno);
+            aluno.setCidade(cidadeDoAluno);
+            aluno.setIdade(idadeDoAluno);
+            alunoDao.inserir(aluno);
+            System.out.println("Aluno inserido com sucesso!");
+            teclado.close();
             bd.close();
-            System.out.println("Conexão encerrada com sucesso.");
-            System.exit(0);
-            System.out.println("Saindo...");
         } catch (SQLException e) {
-            System.out.println("ERRO CONECTANDO AO BANCO.");
             e.printStackTrace();
+            System.out.println("ERRO ao inserir aluno");
         }
-
     }
 }
