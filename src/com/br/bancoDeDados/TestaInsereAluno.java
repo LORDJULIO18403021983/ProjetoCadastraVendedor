@@ -20,7 +20,7 @@ public class TestaInsereAluno {
             System.out.println("Conexão estabelecida com sucesso.");
             // Inserindo aluno.
             String sql = "insert into aluno " +
-                    "(nome, idade, cidade) values (\"carlos\",25,\"Ourinhos\")";
+                    "(nome, idade, cidade) values (\"Julio Abreu\",40,\"Jandira\")";
             Statement comando = bd.createStatement();
             comando.execute(sql);
             System.out.println("Aluno inserido com sucesso.");

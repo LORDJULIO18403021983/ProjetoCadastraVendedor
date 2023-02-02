@@ -16,9 +16,6 @@ public class AlunoDao {
         this.bd = bd;
     }
 
-    public AlunoDao() {
-    }
-
     public void inserir(Aluno aluno) throws SQLException {
         String sql = "insert into aluno (nome, idade, cidade) values (?, ?, ?)";
 
@@ -32,7 +29,7 @@ public class AlunoDao {
     }
 
     //CONSULTAR
-    public  List<Aluno> buscarTodosDao() throws SQLException {
+    public List<Aluno> buscarTodosDao() throws SQLException {
 
         String sql = "select * from aluno ";
         PreparedStatement comando = bd.prepareStatement(sql);
@@ -49,13 +46,15 @@ public class AlunoDao {
         }
         return alunos;
     }
+
+    // dados ordenado pelo nome.
+    public void buscarTodos() throws SQLException {
+        String sql = "select * from aluno order by nome";
+        PreparedStatement comando = bd.prepareStatement(sql);
+        ResultSet cursor = comando.executeQuery();
+
+        while (cursor.next()) {
+            System.out.println(cursor.getString("nome"));;
+        }
+    }
 }
-//    public void buscarTodos() throws SQLException {
-//        String sql = "select * from aluno order by nome";
-//        PreparedStatement comando = bd.prepareStatement(sql);
-//        ResultSet cursor = comando.executeQuery();
-//
-//        while (cursor.next()){
-//            System.out.println(cursor.getString("nome"));
-//        }
-//    }
