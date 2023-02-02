@@ -54,7 +54,18 @@ public class AlunoDao {
         ResultSet cursor = comando.executeQuery();
 
         while (cursor.next()) {
-            System.out.println(cursor.getString("nome"));;
+            System.out.println(cursor.getString("nome"));
         }
+    }
+
+    public void alterar(Aluno aluno) throws SQLException {
+        String sql = "update aluno set idade = ?, cidade = ? where nome = ?";
+
+        PreparedStatement comando = bd.prepareStatement(sql);
+        comando.setInt(1, aluno.getIdade());
+        comando.setString(2, aluno.getCidade());
+        comando.setString(3, aluno.getNome());
+
+        comando.execute();
     }
 }
