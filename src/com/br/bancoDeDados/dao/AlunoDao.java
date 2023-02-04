@@ -10,29 +10,29 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class AlunoDao {
-    private Connection bd;
+    private final Connection conn;
 
     public AlunoDao(Connection bd) {
-        this.bd = bd;
+        this.conn = bd;
     }
 
     public void inserir(Aluno aluno) throws SQLException {
         String sql = "insert into aluno (nome, idade, cidade) values (?, ?, ?)";
 
-        PreparedStatement comando = bd.prepareStatement(sql);
+        PreparedStatement pstm = conn.prepareStatement(sql);
 
-        comando.setString(1, aluno.getNome());
-        comando.setInt(2, aluno.getIdade());
-        comando.setString(3, aluno.getCidade());
+        pstm.setString(1, aluno.getNome());
+        pstm.setInt(2, aluno.getIdade());
+        pstm.setString(3, aluno.getCidade());
 
-        comando.execute();
+        pstm.execute();
     }
 
     //CONSULTAR
     public List<Aluno> buscarTodosDao() throws SQLException {
 
         String sql = "select * from aluno ";
-        PreparedStatement comando = bd.prepareStatement(sql);
+        PreparedStatement comando = conn.prepareStatement(sql);
         ResultSet cursor = comando.executeQuery();
 
         List<Aluno> alunos = new ArrayList<Aluno>();
@@ -50,7 +50,7 @@ public class AlunoDao {
     // dados ordenado pelo nome.
     public void buscarTodos() throws SQLException {
         String sql = "select * from aluno order by nome";
-        PreparedStatement comando = bd.prepareStatement(sql);
+        PreparedStatement comando = conn.prepareStatement(sql);
         ResultSet cursor = comando.executeQuery();
 
         while (cursor.next()) {
@@ -61,7 +61,7 @@ public class AlunoDao {
     public void alterar(Aluno aluno) throws SQLException {
         String sql = "update aluno set idade = ?, cidade = ? where nome = ?";
 
-        PreparedStatement comando = bd.prepareStatement(sql);
+        PreparedStatement comando = conn.prepareStatement(sql);
         comando.setInt(1, aluno.getIdade());
         comando.setString(2, aluno.getCidade());
         comando.setString(3, aluno.getNome());

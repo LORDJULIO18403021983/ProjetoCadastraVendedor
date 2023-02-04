@@ -37,7 +37,7 @@ public class ExemploTabela {
 
         botaoExcluir = new JButton("Excluir");
         botaoExcluir.setBounds(150, 200, 100, 50);
-        botaoExcluir.addActionListener(new removeLinhaSelecionada());
+        botaoExcluir.addActionListener(new ListenerRemoveLinhaSelecionada());
 
         /*AO INVÉS DE PASSAR DIRETO, COLOCAMOS OS DADOS EM UM MODELO.*/
         DefaultTableModel modelo = new DefaultTableModel(dados, colunas);
@@ -74,7 +74,7 @@ public class ExemploTabela {
         }
     }
 
-    public class removeLinhaSelecionada implements ActionListener {
+    public class ListenerRemoveLinhaSelecionada implements ActionListener {
         public void actionPerformed(ActionEvent e) {
             removeLinhaSelecionada();
         }

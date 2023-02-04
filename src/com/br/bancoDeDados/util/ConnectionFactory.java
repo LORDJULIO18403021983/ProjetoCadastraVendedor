@@ -11,11 +11,11 @@ public class ConnectionFactory {
         String login = "root";
         String senha = "root";
 
-        Connection conexao = null;
+        Connection conn = null;
 
         try {
             Class.forName(driver);
-            conexao = DriverManager.getConnection(local, login, senha);
+            conn = DriverManager.getConnection(local, login, senha);
         } catch (ClassNotFoundException e) {
             System.out.println("Driver do Banco não encontrado");
         } catch (SQLException e) {
@@ -23,6 +23,6 @@ public class ConnectionFactory {
             e.getMessage();
             System.out.println(e);
         }
-        return conexao;
+        return conn;
     }
 }

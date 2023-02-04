@@ -21,7 +21,7 @@ public class TestaInsereAluno2 {
     private void iniciar() {
 
         //conecta com o banco
-        Connection bd = ConnectionFactory.getConnection();
+        Connection conn = ConnectionFactory.getConnection();
         // recebe do teclado
         Scanner teclado = new Scanner(System.in);
         System.out.println("Nome do aluno.....: ");
@@ -32,7 +32,7 @@ public class TestaInsereAluno2 {
         int idadeDoAluno = teclado.nextInt();
 
         try {
-            AlunoDao alunoDao = new AlunoDao(bd);
+            AlunoDao alunoDao = new AlunoDao(conn);
             Aluno aluno = new Aluno();
             aluno.setNome(nomeDoAluno);
             aluno.setCidade(cidadeDoAluno);
@@ -40,7 +40,7 @@ public class TestaInsereAluno2 {
             alunoDao.inserir(aluno);
             System.out.println("Aluno inserido com sucesso!");
             teclado.close();
-            bd.close();
+            conn.close();
         } catch (SQLException e) {
             e.printStackTrace();
             System.out.println("ERRO ao inserir aluno");

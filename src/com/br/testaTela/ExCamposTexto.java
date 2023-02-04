@@ -38,11 +38,11 @@ public class ExCamposTexto {
 
         txtObs = new JTextArea();
         brBarrDeRolagem = new JScrollPane();
-        brBarrDeRolagem.setBounds(140, 110, 101, 100);
+        brBarrDeRolagem.setBounds(140, 110, 100, 44);
         brBarrDeRolagem.setViewportView(txtObs);
 
         btnVerificar = new JButton("Verificar");
-        btnVerificar.setBounds(117, 249, 83, 28);
+        btnVerificar.setBounds(117, 200, 83, 28);
 
         btnVerificar.addActionListener(new ActionListener() {
             @Override

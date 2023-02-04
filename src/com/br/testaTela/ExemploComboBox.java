@@ -15,7 +15,7 @@ public class ExemploComboBox {
     }
 
     public void iniciar() {
-        janela = new JFrame("Exemplo de Menu");
+        janela = new JFrame("Exemplo de ComboBox");
         janela.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         janela.setSize(400, 300);
 
