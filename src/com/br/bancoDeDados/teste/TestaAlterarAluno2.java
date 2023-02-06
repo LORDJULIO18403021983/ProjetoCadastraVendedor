@@ -14,7 +14,7 @@ import java.util.List;
 
 public class TestaAlterarAluno2 {
     private JLabel labelNome, labelIdade, labelCidade;
-    private JTextField tNome, tIdade, tCidade;
+    private JTextField textFieldNome, textFieldIdade, textFieldCidade;
     private JButton botaoAlterar;
 
     private JFrame janela;
@@ -56,12 +56,12 @@ public class TestaAlterarAluno2 {
         labelIdade = new JLabel("Idade: ");
         labelIdade.setBounds(50, 140, 100, 20);
 
-        tNome = new JTextField();
-        tNome.setBounds(50, 42, 250, 20);
-        tCidade = new JTextField();
-        tCidade.setBounds(50, 102, 250, 20);
-        tIdade = new JTextField();
-        tIdade.setBounds(50, 162, 20, 20);
+        textFieldNome = new JTextField();
+        textFieldNome.setBounds(50, 42, 250, 20);
+        textFieldCidade = new JTextField();
+        textFieldCidade.setBounds(50, 102, 250, 20);
+        textFieldIdade = new JTextField();
+        textFieldIdade.setBounds(50, 162, 20, 20);
 
         janela = new JFrame("TELA ALTERAR ALUNO");
         painelConteudo = (JPanel) janela.getContentPane();
@@ -69,9 +69,9 @@ public class TestaAlterarAluno2 {
         painelConteudo.add(labelNome);
         painelConteudo.add(labelCidade);
         painelConteudo.add(labelIdade);
-        painelConteudo.add(tNome);
-        painelConteudo.add(tCidade);
-        painelConteudo.add(tIdade);
+        painelConteudo.add(textFieldNome);
+        painelConteudo.add(textFieldCidade);
+        painelConteudo.add(textFieldIdade);
         painelConteudo.add(botaoAlterar);
         janela.setSize(400, 300);
         janela.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -88,12 +88,12 @@ public class TestaAlterarAluno2 {
             if (e.getSource() == botaoAlterar) {
                 Connection db = ConnectionFactory.getConnection();
                 try {
-                    AlunoDao alunoDAO = new AlunoDao(db);
+                    AlunoDao alunoDao = new AlunoDao(db);
                     Aluno aluno = new Aluno();
-                    aluno.setNome(tNome.getText().toUpperCase());
-                    aluno.setCidade(tCidade.getText().toUpperCase());
-                    aluno.setIdade(Integer.parseInt(tIdade.getText()));
-                    alunoDAO.alterar(aluno);
+                    aluno.setNome(textFieldNome.getText().toUpperCase());
+                    aluno.setCidade(textFieldCidade.getText().toUpperCase());
+                    aluno.setIdade(Integer.parseInt(textFieldIdade.getText()));
+                    alunoDao.alterar(aluno);
                     // FECHANDO O BANCO DE DADOS
                     JOptionPane.showMessageDialog(null, "ALTERAÇÃO REALIZADA COM SUCESSO", "INFORMAÇÃO", 2);
                     db.close();
