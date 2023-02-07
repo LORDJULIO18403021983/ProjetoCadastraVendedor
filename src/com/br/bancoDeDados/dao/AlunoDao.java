@@ -2,6 +2,7 @@ package com.br.bancoDeDados.dao;
 
 import com.br.bancoDeDados.model.Aluno;
 
+import javax.swing.*;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -12,8 +13,8 @@ import java.util.List;
 public class AlunoDao {
     private final Connection conn;
 
-    public AlunoDao(Connection bd) {
-        this.conn = bd;
+    public AlunoDao(Connection conn) {
+        this.conn = conn;
     }
 
     public void inserir(Aluno aluno) throws SQLException {
@@ -32,8 +33,8 @@ public class AlunoDao {
     public List<Aluno> buscarTodosDao() throws SQLException {
 
         String sql = "select * from aluno ";
-        PreparedStatement comando = conn.prepareStatement(sql);
-        ResultSet cursor = comando.executeQuery();
+        PreparedStatement pstm = conn.prepareStatement(sql);
+        ResultSet cursor = pstm.executeQuery();
 
         List<Aluno> alunos = new ArrayList<Aluno>();
 
@@ -50,8 +51,8 @@ public class AlunoDao {
     // dados ordenado pelo nome.
     public void buscarTodos() throws SQLException {
         String sql = "select * from aluno order by nome";
-        PreparedStatement comando = conn.prepareStatement(sql);
-        ResultSet cursor = comando.executeQuery();
+        PreparedStatement pstm = conn.prepareStatement(sql);
+        ResultSet cursor = pstm.executeQuery();
 
         while (cursor.next()) {
             System.out.println(cursor.getString("nome"));
@@ -61,11 +62,30 @@ public class AlunoDao {
     public void alterar(Aluno aluno) throws SQLException {
         String sql = "update aluno set idade = ?, cidade = ? where nome = ?";
 
-        PreparedStatement comando = conn.prepareStatement(sql);
-        comando.setInt(1, aluno.getIdade());
-        comando.setString(2, aluno.getCidade());
-        comando.setString(3, aluno.getNome());
+        PreparedStatement pstm = conn.prepareStatement(sql);
 
-        comando.execute();
+        pstm.setInt(1, aluno.getIdade());
+        pstm.setString(2, aluno.getCidade());
+        pstm.setString(3, aluno.getNome());
+
+        pstm.execute();
+    }
+
+    public void excluir(Aluno aluno) throws SQLException {
+
+        //String sql = "delete from aluno where nome = ? and idade = ? and cidade = ?";
+        try {
+            PreparedStatement pstm = conn.prepareStatement("delete from aluno where nome = ? and idade = ? and cidade = ?");
+
+            pstm.setString(1, aluno.getNome());
+            pstm.setInt(2, aluno.getIdade());
+            pstm.setString(3, aluno.getCidade());
+
+            pstm.executeUpdate();
+            JOptionPane.showMessageDialog(null,"Removido com sucesso.","sucesso",JOptionPane.INFORMATION_MESSAGE);
+
+        }catch (SQLException erroSql){
+            JOptionPane.showMessageDialog(null,"Erro ao Remover." + erroSql,"Erro",JOptionPane.INFORMATION_MESSAGE);
+        }
     }
 }

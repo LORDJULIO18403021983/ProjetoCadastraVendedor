@@ -13,35 +13,35 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class TestaConsultaAluno2 {
+public class TestaExcluirAluno2 {
 
     private JFrame janela;
     private JTable tabela;
-    private JButton botaoOK;
+    private JButton botaoExcluir;
     private JScrollPane painelDeScroll;
     private String[] colunas = new String[]{"Nome", "Idade", "Cidade"};
     private String[][] dados = new String[][]{{}};
 
-    public TestaConsultaAluno2() {
+    public TestaExcluirAluno2() {
         iniciar();
     }
 
     public static void main(String[] args) {
-        new TestaConsultaAluno2();
+        new TestaExcluirAluno2();
     }
 
     public void iniciar() {
 
         //*CONFIGURANDO A JANELA.*/
-        janela = new JFrame("Tabela consulta alunos");
+        janela = new JFrame("Tabela Excluir Alunos");
         janela.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         janela.setResizable(false);
         janela.setSize(400, 300);
         janela.setLayout(null);
 
-        botaoOK = new JButton("OK");
-        botaoOK.setBounds(130, 180, 100, 50);
-        botaoOK.addActionListener(new ListenerBotaoOK());
+        botaoExcluir = new JButton("Excluir");
+        botaoExcluir.setBounds(130, 180, 100, 50);
+        botaoExcluir.addActionListener(new ListenerBotaoExcluir());
 
         /*AO INVÉS DE PASSAR DIRETO, COLOCAMOS OS DADOS EM UM MODELO.*/
         DefaultTableModel modelo = new DefaultTableModel(dados, colunas);
@@ -51,7 +51,7 @@ public class TestaConsultaAluno2 {
         painelDeScroll.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
         painelDeScroll.setBounds(35, 50, 300, 100);
         janela.add(painelDeScroll);
-        janela.add(botaoOK);
+        janela.add(botaoExcluir);
 
         janela.setVisible(true);
 
@@ -69,12 +69,26 @@ public class TestaConsultaAluno2 {
         }
     }
 
-    public class ListenerBotaoOK implements ActionListener {
+    public class ListenerBotaoExcluir implements ActionListener {
         public void actionPerformed(ActionEvent e) {
-            if (e.getSource() == botaoOK) {
-                new TestaAlterarAluno2();
+            Connection conn = ConnectionFactory.getConnection();
+            if (e.getSource() == botaoExcluir) {
+                try {
+                    AlunoDao alunoDao = new AlunoDao(conn);
+                    Aluno aluno = new Aluno();
+                    alunoDao.excluir(aluno);
+                    System.out.println("Aluno removido com sucesso!");
+                    conn.close();
+                    // Obtem o modelo da JTable.
+                    DefaultTableModel modelo = (DefaultTableModel) tabela.getModel();
+
+                    modelo.removeRow(tabela.getSelectedRow());
+
+                } catch (SQLException err) {
+                    err.printStackTrace();
+                    System.out.println("ERRO ao inserir aluno");
+                }
             }
         }
     }
 }
-
