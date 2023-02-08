@@ -4,7 +4,6 @@ import javax.swing.*;
 
 public class ExemploComboBox {
     private JFrame janela;
-    private JPanel painelDaJanela;
 
     private JComboBox<Object> cbox;
     private String[] computerComps = {"Monitor", "Teclado", "Mouse", "Scanner", "Moden", "CDROM", "RAM", "Disquete"};
@@ -19,8 +18,7 @@ public class ExemploComboBox {
         janela.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         janela.setSize(400, 300);
 
-        painelDaJanela = (JPanel) janela.getContentPane();
-        painelDaJanela.setLayout(null);
+        janela.setLayout(null);
 
         // Cria o menu retrátil
         cbox = new JComboBox<Object>(computerComps);
@@ -29,7 +27,7 @@ public class ExemploComboBox {
         // Numero de colunas visiveis
         cbox.setMaximumRowCount(5);
         // adiciona no painel
-        painelDaJanela.add(cbox);
+        janela.add(cbox);
 
         janela.setVisible(true);
     }

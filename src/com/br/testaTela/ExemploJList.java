@@ -5,7 +5,7 @@ import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import java.awt.*;
 
-public class ExemploLista {
+public class ExemploJList {
     // Declaração de referencias
     JFrame janela;
     JList list;
@@ -16,12 +16,12 @@ public class ExemploLista {
     String[] diasSemana = {"Domingo", "Segunda", "Terça", "Quarta", "Quinta", "Sexta", "Sabado"};
 
     public static void main(String[] args) {
-        ExemploLista aplicativo = new ExemploLista();
+        ExemploJList aplicativo = new ExemploJList();
         aplicativo.iniciar();
     }
 
     public void iniciar() {
-        janela = new JFrame("Exemplo de Lista");
+        janela = new JFrame("Exemplo de JList");
         painelDeJanela = (JPanel) janela.getContentPane();
         painelDeJanela.setLayout(null);
 

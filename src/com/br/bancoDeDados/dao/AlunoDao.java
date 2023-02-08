@@ -49,9 +49,10 @@ public class AlunoDao {
     }
 
     // dados ordenado pelo nome.
-    public void buscarTodos() throws SQLException {
+    public void Consultar() throws SQLException {
         String sql = "select * from aluno order by nome";
         PreparedStatement pstm = conn.prepareStatement(sql);
+
         ResultSet cursor = pstm.executeQuery();
 
         while (cursor.next()) {
