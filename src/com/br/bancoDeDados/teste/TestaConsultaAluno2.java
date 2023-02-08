@@ -5,22 +5,19 @@ import com.br.bancoDeDados.model.Aluno;
 import com.br.bancoDeDados.util.ConnectionFactory;
 
 import javax.swing.*;
-import javax.swing.table.DefaultTableModel;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
 
 public class TestaConsultaAluno2 {
 
     private JFrame janela;
-    private JTable tabela;
     private JButton botaoOK;
-    private JScrollPane painelDeScroll;
-    private String[] colunas = new String[]{"Nome", "Idade", "Cidade"};
-    private String[][] dados = new String[][]{{}};
+    private JComboBox<Aluno> comboBoxAluno;
+    private String[] consultarAlunos = {};
 
     public TestaConsultaAluno2() {
         iniciar();
@@ -43,26 +40,21 @@ public class TestaConsultaAluno2 {
         botaoOK.setBounds(130, 180, 100, 50);
         botaoOK.addActionListener(new ListenerBotaoOK());
 
-        /*AO INVÉS DE PASSAR DIRETO, COLOCAMOS OS DADOS EM UM MODELO.*/
-        DefaultTableModel modelo = new DefaultTableModel(dados, colunas);
-        tabela = new JTable(modelo);
-        //INSERINDO TABELA EM UM PAINEL DE SCROLL.
-        painelDeScroll = new JScrollPane(tabela);
-        painelDeScroll.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
-        painelDeScroll.setBounds(35, 50, 300, 100);
-        janela.add(painelDeScroll);
-        janela.add(botaoOK);
+        // Cria o menu retrátil
+        comboBoxAluno = new JComboBox<Aluno>();
+        comboBoxAluno.setSelectedIndex(-1);
+        comboBoxAluno.setBounds(35, 50, 300, 100);
+        // Numero de colunas visiveis
+        comboBoxAluno.setMaximumRowCount(5);
 
+        // adiciona no painel.
+        janela.add(comboBoxAluno);
+        janela.add(botaoOK);
         janela.setVisible(true);
 
         try {
-            Connection conn = ConnectionFactory.getConnection();
-            AlunoDao aluno = new AlunoDao(conn);
-            List<Aluno> retornoAluno = new ArrayList<Aluno>();
-            retornoAluno = aluno.buscarTodosDao();
-            for (Aluno s : retornoAluno) {
-                modelo.addRow(new String[]{s.getNome(), Integer.toString(s.getIdade()), s.getCidade()});
-            }
+
+
         } catch (SQLException e) {
             // TODO: handle exception
             System.out.println("Erro de Conexão");
