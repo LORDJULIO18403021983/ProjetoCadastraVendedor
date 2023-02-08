@@ -3,12 +3,11 @@ package com.br.bancoDeDados.dao;
 import com.br.bancoDeDados.model.Aluno;
 
 import javax.swing.*;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
+
+import static com.br.bancoDeDados.util.ConnectionFactory.getConnection;
 
 public class AlunoDao {
     private final Connection conn;
@@ -69,24 +68,16 @@ public class AlunoDao {
         pstm.setString(2, aluno.getCidade());
         pstm.setString(3, aluno.getNome());
 
-        pstm.execute();
+        pstm.executeUpdate();
     }
 
     public void excluir(Aluno aluno) throws SQLException {
-
-        //String sql = "delete from aluno where nome = ? and idade = ? and cidade = ?";
-        try {
-            PreparedStatement pstm = conn.prepareStatement("delete from aluno where nome = ? and idade = ? and cidade = ?");
-
-            pstm.setString(1, aluno.getNome());
-            pstm.setInt(2, aluno.getIdade());
-            pstm.setString(3, aluno.getCidade());
-
-            pstm.executeUpdate();
-            JOptionPane.showMessageDialog(null,"Removido com sucesso.","sucesso",JOptionPane.INFORMATION_MESSAGE);
-
-        }catch (SQLException erroSql){
-            JOptionPane.showMessageDialog(null,"Erro ao Remover." + erroSql,"Erro",JOptionPane.INFORMATION_MESSAGE);
+        String sql = "Delete From aluno Where nome = ?";
+        try (PreparedStatement pstm = conn.prepareStatement(sql)) {
+            getConnection();
+            String nome1 = aluno.getNome();
+            pstm.executeUpdate("Delete From aluno Where nome = '" + nome1 + "'");
+        JOptionPane.showMessageDialog(null,"Dados deletados!");
         }
     }
 }

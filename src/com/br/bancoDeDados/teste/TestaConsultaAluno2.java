@@ -19,7 +19,7 @@ public class TestaConsultaAluno2 {
     private JTable tabela;
     private JButton botaoOK;
     private JScrollPane painelDeScroll;
-    private String[] colunas = new String[]{"Nome", "Idade", "Cidade"};
+    private String[] colunas = new String[]{"Nome"};
     private String[][] dados = new String[][]{{}};
 
     public TestaConsultaAluno2() {
@@ -61,7 +61,7 @@ public class TestaConsultaAluno2 {
             List<Aluno> retornoAluno = new ArrayList<Aluno>();
             retornoAluno = aluno.buscarTodosDao();
             for (Aluno s : retornoAluno) {
-                modelo.addRow(new String[]{s.getNome(), Integer.toString(s.getIdade()), s.getCidade()});
+                modelo.addRow(new String[]{s.getNome()});
             }
         } catch (SQLException e) {
             // TODO: handle exception
@@ -72,6 +72,8 @@ public class TestaConsultaAluno2 {
     public class ListenerBotaoOK implements ActionListener {
         public void actionPerformed(ActionEvent e) {
             if (e.getSource() == botaoOK) {
+
+                tabela.getSelectedRow();
                 new TestaAlterarAluno2();
             }
         }

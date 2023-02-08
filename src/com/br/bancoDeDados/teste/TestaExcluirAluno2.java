@@ -71,24 +71,13 @@ public class TestaExcluirAluno2 {
 
     public class ListenerBotaoExcluir implements ActionListener {
         public void actionPerformed(ActionEvent e) {
-            Connection conn = ConnectionFactory.getConnection();
             if (e.getSource() == botaoExcluir) {
-                try {
-                    AlunoDao alunoDao = new AlunoDao(conn);
-                    Aluno aluno = new Aluno();
-                    alunoDao.excluir(aluno);
-                    System.out.println("Aluno removido com sucesso!");
-                    conn.close();
-                    // Obtem o modelo da JTable.
-                    DefaultTableModel modelo = (DefaultTableModel) tabela.getModel();
-
-                    modelo.removeRow(tabela.getSelectedRow());
-
-                } catch (SQLException err) {
-                    err.printStackTrace();
-                    System.out.println("ERRO ao inserir aluno");
-                }
+                // Obtem o modelo da JTable.
+                DefaultTableModel modelo = (DefaultTableModel) tabela.getModel();
+                // Removendo a linha selecionada da JTable.
+                modelo.removeRow(tabela.getSelectedRow());
             }
         }
     }
 }
+

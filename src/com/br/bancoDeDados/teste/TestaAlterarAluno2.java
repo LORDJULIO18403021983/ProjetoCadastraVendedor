@@ -108,12 +108,11 @@ public class TestaAlterarAluno2 {
                     aluno.setNome(textFieldNome.getText().trim().toUpperCase());
                     aluno.setCidade(textFieldCidade.getText().trim().toUpperCase());
                     aluno.setIdade(Integer.parseInt(textFieldIdade.getText().trim()));
-                    alunoDao.inserir(aluno);
+                    alunoDao.alterar(aluno);
                     System.out.println("Aluno inserido com sucesso!");
 
                     // Obtendo o modelo da JTable.
                     DefaultTableModel modelo = (DefaultTableModel) tabela.getModel();
-
                     // Removendo a linha selecionada da JTable.
                     modelo.removeRow(tabela.getSelectedRow());
 
