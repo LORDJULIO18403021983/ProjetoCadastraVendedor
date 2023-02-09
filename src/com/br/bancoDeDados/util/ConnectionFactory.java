@@ -7,7 +7,7 @@ import java.sql.SQLException;
 public class ConnectionFactory {
     public static Connection getConnection() {
         String driver = "com.mysql.jdbc.Driver";
-        String local = "jdbc:mysql://localhost/turmas";
+        String local = "jdbc:mysql://localhost:3306/turmas";
         String login = "root";
         String senha = "root";
 

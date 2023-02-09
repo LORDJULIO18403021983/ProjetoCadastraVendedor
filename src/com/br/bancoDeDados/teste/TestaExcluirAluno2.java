@@ -57,7 +57,7 @@ public class TestaExcluirAluno2 {
 
         try {
             Connection conn = ConnectionFactory.getConnection();
-            AlunoDao aluno = new AlunoDao(conn);
+            AlunoDao aluno = new AlunoDao();
             List<Aluno> retornoAluno = new ArrayList<Aluno>();
             retornoAluno = aluno.buscarTodosDao();
             for (Aluno s : retornoAluno) {

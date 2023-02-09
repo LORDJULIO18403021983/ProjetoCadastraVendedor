@@ -18,7 +18,7 @@ public class TestaConsultaAluno2 {
     private JFrame janela;
     private JTable tabela;
     private JButton botaoOK;
-    private JScrollPane painelDeScroll;
+    //private JScrollPane tabela;
     private String[] colunas = new String[]{"Nome"};
     private String[][] dados = new String[][]{{}};
 
@@ -47,17 +47,17 @@ public class TestaConsultaAluno2 {
         DefaultTableModel modelo = new DefaultTableModel(dados, colunas);
         tabela = new JTable(modelo);
         //INSERINDO TABELA EM UM PAINEL DE SCROLL.
-        painelDeScroll = new JScrollPane(tabela);
-        painelDeScroll.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
-        painelDeScroll.setBounds(35, 50, 300, 100);
-        janela.add(painelDeScroll);
+        //painelDeScroll = new JScrollPane(tabela);
+        tabela.getEditingRow();
+        tabela.setBounds(35, 50, 300, 100);
+        janela.add(tabela);
         janela.add(botaoOK);
 
         janela.setVisible(true);
 
         try {
             Connection conn = ConnectionFactory.getConnection();
-            AlunoDao aluno = new AlunoDao(conn);
+            AlunoDao aluno = new AlunoDao();
             List<Aluno> retornoAluno = new ArrayList<Aluno>();
             retornoAluno = aluno.buscarTodosDao();
             for (Aluno s : retornoAluno) {
@@ -73,8 +73,15 @@ public class TestaConsultaAluno2 {
         public void actionPerformed(ActionEvent e) {
             if (e.getSource() == botaoOK) {
 
-                tabela.getSelectedRow();
-                new TestaAlterarAluno2();
+                int linhaSelecionada = tabela.getSelectedRow();
+                String nomeSelecionado = tabela.getValueAt(linhaSelecionada,0).toString();
+                //new TestaAlterarAluno2();
+                TestaAlterarAluno2 alterarAluno2 = new TestaAlterarAluno2();
+                try {
+                    alterarAluno2.iniciar(nomeSelecionado);
+                } catch (SQLException ex) {
+                    ex.printStackTrace();
+                }
             }
         }
     }

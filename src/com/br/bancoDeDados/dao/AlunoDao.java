@@ -2,18 +2,18 @@ package com.br.bancoDeDados.dao;
 
 import com.br.bancoDeDados.model.Aluno;
 
-import javax.swing.*;
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-
-import static com.br.bancoDeDados.util.ConnectionFactory.getConnection;
 
 public class AlunoDao {
     private final Connection conn;
 
-    public AlunoDao(Connection conn) {
-        this.conn = conn;
+    public AlunoDao() {
+        this.conn = null;
     }
 
     public void inserir(Aluno aluno) throws SQLException {
@@ -48,15 +48,20 @@ public class AlunoDao {
     }
 
     // dados ordenado pelo nome.
-    public void Consultar() throws SQLException {
-        String sql = "select * from aluno order by nome";
+    public Aluno Consultar(String nome) throws SQLException {
+        String sql = "select * from aluno where nome";
         PreparedStatement pstm = conn.prepareStatement(sql);
 
         ResultSet cursor = pstm.executeQuery();
+        Aluno aluno = new Aluno();
 
         while (cursor.next()) {
-            System.out.println(cursor.getString("nome"));
+            //System.out.println(cursor.getString("nome"));
+            aluno.setNome(cursor.getString("nome"));
+            aluno.setIdade(Integer.parseInt(cursor.getString("idade")));
+            aluno.setCidade(cursor.getString("cidade"));
         }
+        return aluno;
     }
 
     public void alterar(Aluno aluno) throws SQLException {
@@ -68,16 +73,18 @@ public class AlunoDao {
         pstm.setString(2, aluno.getCidade());
         pstm.setString(3, aluno.getNome());
 
-        pstm.executeUpdate();
+        pstm.execute();
     }
 
     public void excluir(Aluno aluno) throws SQLException {
-        String sql = "Delete From aluno Where nome = ?";
-        try (PreparedStatement pstm = conn.prepareStatement(sql)) {
-            getConnection();
-            String nome1 = aluno.getNome();
-            pstm.executeUpdate("Delete From aluno Where nome = '" + nome1 + "'");
-        JOptionPane.showMessageDialog(null,"Dados deletados!");
+
+        String sql = "delete from aluno where nome = ?";
+        PreparedStatement pstm = conn.prepareStatement(sql);
+        try {
+            pstm.setString(1, "nome");
+            pstm.execute();
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
     }
 }

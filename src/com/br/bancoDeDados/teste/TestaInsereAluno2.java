@@ -32,7 +32,7 @@ public class TestaInsereAluno2 {
         int idadeDoAluno = teclado.nextInt();
 
         try {
-            AlunoDao alunoDao = new AlunoDao(conn);
+            AlunoDao alunoDao = new AlunoDao();
             Aluno aluno = new Aluno();
             aluno.setNome(nomeDoAluno);
             aluno.setCidade(cidadeDoAluno);

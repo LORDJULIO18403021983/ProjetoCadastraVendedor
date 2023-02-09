@@ -10,8 +10,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.Connection;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
 
 public class TestaAlterarAluno2 {
     private JLabel labelNome, labelIdade, labelCidade, labelPainelDeScroll;
@@ -24,15 +22,19 @@ public class TestaAlterarAluno2 {
 
     private JFrame janela;
 
-    public TestaAlterarAluno2() {
-        iniciar();
-    }
+//    public TestaAlterarAluno2() {
+//        iniciar();
+//    }
 
     public static void main(String[] args) {
         new TestaAlterarAluno2();
     }
 
-    public void iniciar() {
+    public void iniciar(String nomeSelecionado) throws SQLException {
+        Aluno aluno = new Aluno();
+        AlunoDao alunoDao = new AlunoDao();
+        aluno = alunoDao.Consultar(nomeSelecionado);
+
 
         janela = new JFrame("TELA ALTERAR ALUNO");
         janela.setLayout(null);
@@ -84,18 +86,18 @@ public class TestaAlterarAluno2 {
         janela.setResizable(false);
         janela.setVisible(true);
 
-        try {
-            Connection conn = ConnectionFactory.getConnection();
-            AlunoDao aluno = new AlunoDao(conn);
-            List<Aluno> retornoAluno = new ArrayList<Aluno>();
-            retornoAluno = aluno.buscarTodosDao();
-            for (Aluno s : retornoAluno) {
-                modelo.addRow(new String[]{s.getNome(), Integer.toString(s.getIdade()), s.getCidade()});
-            }
-        } catch (SQLException e) {
-            // TODO: handle exception
-            System.out.println("Erro de Conexão");
-        }
+//        try {
+//            Connection conn = ConnectionFactory.getConnection();
+//            AlunoDao aluno = new AlunoDao(conn);
+//            List<Aluno> retornoAluno = new ArrayList<Aluno>();
+//            retornoAluno = aluno.buscarTodosDao();
+//            for (Aluno s : retornoAluno) {
+//                modelo.addRow(new String[]{s.getNome(), Integer.toString(s.getIdade()), s.getCidade()});
+//            }
+//        } catch (SQLException e) {
+//            // TODO: handle exception
+//            System.out.println("Erro de Conexão");
+//        }
     }
 
     public class BotaoAlterarListener implements ActionListener {
@@ -103,7 +105,7 @@ public class TestaAlterarAluno2 {
             if (e.getSource() == botaoAlterar) {
                 Connection conn = ConnectionFactory.getConnection();
                 try {
-                    AlunoDao alunoDao = new AlunoDao(conn);
+                    AlunoDao alunoDao = new AlunoDao();
                     Aluno aluno = new Aluno();
                     aluno.setNome(textFieldNome.getText().trim().toUpperCase());
                     aluno.setCidade(textFieldCidade.getText().trim().toUpperCase());
@@ -113,6 +115,7 @@ public class TestaAlterarAluno2 {
 
                     // Obtendo o modelo da JTable.
                     DefaultTableModel modelo = (DefaultTableModel) tabela.getModel();
+                    modelo.addRow(new String[]{aluno.getNome(), Integer.toString(aluno.getIdade()), aluno.getCidade()});
                     // Removendo a linha selecionada da JTable.
                     modelo.removeRow(tabela.getSelectedRow());
 
