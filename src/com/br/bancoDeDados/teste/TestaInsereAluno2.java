@@ -1,49 +1,99 @@
 package com.br.bancoDeDados.teste;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.sql.SQLException;
+
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JTextField;
+
 import com.br.bancoDeDados.dao.AlunoDao;
 import com.br.bancoDeDados.model.Aluno;
 import com.br.bancoDeDados.util.ConnectionFactory;
-
-import java.sql.Connection;
-import java.sql.SQLException;
-import java.util.Scanner;
+import com.mysql.jdbc.Connection;
 
 public class TestaInsereAluno2 {
 
-    public TestaInsereAluno2() {
-        iniciar();
-    }
+	private JLabel labelNome, labelIdade, labelCidade;
+	private JTextField textFieldNome, textFieldIdade, textFieldCidade;
+	private JButton buttonIncluir;
+	private JFrame janela;
 
-    public static void main(String[] args) {
-        new TestaInsereAluno2();
-    }
+	public TestaInsereAluno2() {
+		iniciar();
+	}
 
-    private void iniciar() {
+	public static void main(String[] args) {
+		new TestaInsereAluno2();
+	}
 
-        //conecta com o banco
-        Connection conn = ConnectionFactory.getConnection();
-        // recebe do teclado
-        Scanner teclado = new Scanner(System.in);
-        System.out.println("Nome do aluno.....: ");
-        String nomeDoAluno = teclado.nextLine();
-        System.out.println("Cidade do aluno...: ");
-        String cidadeDoAluno = teclado.nextLine();
-        System.out.println("Idade do aluno....: ");
-        int idadeDoAluno = teclado.nextInt();
+	private void iniciar() {
 
-        try {
-            AlunoDao alunoDao = new AlunoDao();
-            Aluno aluno = new Aluno();
-            aluno.setNome(nomeDoAluno);
-            aluno.setCidade(cidadeDoAluno);
-            aluno.setIdade(idadeDoAluno);
-            alunoDao.inserir(aluno);
-            System.out.println("Aluno inserido com sucesso!");
-            teclado.close();
-            conn.close();
-        } catch (SQLException e) {
-            e.printStackTrace();
-            System.out.println("ERRO ao inserir aluno");
-        }
-    }
+		janela = new JFrame("Cadastramento de Aluno");
+		janela.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+		buttonIncluir = new JButton("Inserir");
+		buttonIncluir.setBounds(50, 200, 95, 30);
+		buttonIncluir.addActionListener(new BotaoListener());
+
+		labelNome = new JLabel("Nome: ");
+		labelNome.setBounds(50, 20, 100, 20);
+		labelCidade = new JLabel("Cidade: ");
+		labelCidade.setBounds(50, 80, 100, 20);
+		labelIdade = new JLabel("Idade: ");
+		labelIdade.setBounds(50, 140, 100, 20);
+
+		textFieldNome = new JTextField();
+		textFieldNome.setBounds(50, 42, 250, 20);
+		textFieldCidade = new JTextField();
+		textFieldCidade.setBounds(50, 102, 250, 20);
+		textFieldIdade = new JTextField();
+		textFieldIdade.setBounds(50, 162, 20, 20);
+
+		janela.add(labelNome);
+		janela.add(labelCidade);
+		janela.add(labelIdade);
+		janela.add(textFieldNome);
+		janela.add(textFieldCidade);
+		janela.add(textFieldIdade);
+		janela.add(buttonIncluir);
+		janela.setLayout(null);
+		janela.setSize(400, 300);
+		janela.setVisible(true);
+	}
+
+	public class BotaoListener implements ActionListener {
+		public void actionPerformed(ActionEvent e) {
+			if (e.getSource() == buttonIncluir) {
+				Connection conn = ConnectionFactory.getConnection();
+				try {
+					AlunoDao alunoDAO = new AlunoDao(conn);
+					Aluno aluno = new Aluno();
+					aluno.setNome(textFieldNome.getText().toUpperCase());
+					aluno.setCidade(textFieldCidade.getText().toUpperCase());
+					aluno.setIdade(Integer.parseInt(textFieldIdade.getText()));
+
+					// Converto os textField's em informação que o metodo inserir entenda.
+					String nome = textFieldNome.getText().toUpperCase();
+					int idade = Integer.parseInt(textFieldIdade.getText());
+					String cidade = textFieldCidade.getText().toUpperCase();
+
+					// Alimento o metodo inserir com as informações digitadas dos textField's.
+					alunoDAO.inserir(nome, idade, cidade);
+					JOptionPane.showMessageDialog(null, "Aluno cadastrado com sucesso...", "INFORMAÇÃO ", 2);
+
+					// FECHANDO O BANCO DE DADOS
+					conn.close();
+
+					// CATHC VERIFICANDO SE O BANCO DEU ERRO AO ABRIR
+				} catch (SQLException ee) {
+					JOptionPane.showMessageDialog(null, "Erro ao incluir Aluno ..", "Erro !!!", 2);
+					ee.printStackTrace();
+				}
+			}
+		}
+	}
 }

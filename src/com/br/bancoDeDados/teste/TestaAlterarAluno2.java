@@ -10,128 +10,140 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class TestaAlterarAluno2 {
-    private JLabel labelNome, labelIdade, labelCidade, labelPainelDeScroll;
-    private JTextField textFieldNome, textFieldIdade, textFieldCidade;
-    private JButton botaoAlterar;
-    private JTable tabela;
-    private JScrollPane painelDeScroll;
-    private String[] colunas = new String[]{"Nome", "Idade", "Cidade"};
-    private String[][] dados = new String[][]{{}};
+	private JLabel labelNome, labelIdade, labelCidade, labelPainelDeScroll;
+	private JTextField textFieldNome, textFieldIdade, textFieldCidade;
+	private JButton botaoAlterar;
+	private JTable tabela;
+	private JScrollPane painelDeScroll;
+	private String[] colunas = new String[] { "Nome", "Idade", "Cidade" };
+	private String[][] dados = new String[][] { {} };
 
-    private JFrame janela;
+	private JFrame janela;
 
-//    public TestaAlterarAluno2() {
-//        iniciar();
-//    }
+	public TestaAlterarAluno2() {
+		iniciar();
+	}
 
-    public static void main(String[] args) {
-        new TestaAlterarAluno2();
-    }
+	public static void main(String[] args) {
+		new TestaAlterarAluno2();
+	}
 
-    public void iniciar(String nomeSelecionado) throws SQLException {
-        Aluno aluno = new Aluno();
-        AlunoDao alunoDao = new AlunoDao();
-        aluno = alunoDao.Consultar(nomeSelecionado);
+	public void iniciar() {
+		janela = new JFrame("TELA ALTERAR ALUNO");
+		janela.setLayout(null);
 
+		// Criando os label's.
+		labelNome = new JLabel("Nome: ");
+		labelNome.setBounds(50, 20, 100, 20);
+		labelCidade = new JLabel("Cidade: ");
+		labelCidade.setBounds(50, 80, 100, 20);
+		labelIdade = new JLabel("Idade: ");
+		labelIdade.setBounds(50, 140, 100, 20);
+		labelPainelDeScroll = new JLabel("Banco de Dados jdbc:");
+		labelPainelDeScroll.setBounds(400, 20, 200, 20);
 
-        janela = new JFrame("TELA ALTERAR ALUNO");
-        janela.setLayout(null);
+		// Criando os TextField's.
+		textFieldNome = new JTextField();
+		textFieldNome.setBounds(50, 42, 250, 20);
+		textFieldCidade = new JTextField();
+		textFieldCidade.setBounds(50, 102, 250, 20);
+		textFieldIdade = new JTextField();
+		textFieldIdade.setBounds(50, 162, 20, 20);
 
-        // Criando os label's.
-        labelNome = new JLabel("Nome: ");
-        labelNome.setBounds(50, 20, 100, 20);
-        labelCidade = new JLabel("Cidade: ");
-        labelCidade.setBounds(50, 80, 100, 20);
-        labelIdade = new JLabel("Idade: ");
-        labelIdade.setBounds(50, 140, 100, 20);
-        labelPainelDeScroll = new JLabel("Banco de Dados jdbc:");
-        labelPainelDeScroll.setBounds(400, 20, 200, 20);
+		// Criando o bot√£o.
+		botaoAlterar = new JButton("Alterar");
+		botaoAlterar.setBounds(50, 200, 95, 30);
+		botaoAlterar.addActionListener(new BotaoAlterarListener());
 
-        // Criando os TextField's.
-        textFieldNome = new JTextField();
-        textFieldNome.setBounds(50, 42, 250, 20);
-        textFieldCidade = new JTextField();
-        textFieldCidade.setBounds(50, 102, 250, 20);
-        textFieldIdade = new JTextField();
-        textFieldIdade.setBounds(50, 162, 20, 20);
+		/* AO INV√âS DE PASSAR DIRETO, COLOCAMOS OS DADOS EM UM MODELO. */
+		DefaultTableModel modelo = new DefaultTableModel(dados, colunas);
+		tabela = new JTable(modelo);
+		// INSERINDO TABELA EM UM PAINEL DE SCROLL.
+		painelDeScroll = new JScrollPane(tabela);
+		painelDeScroll.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+		painelDeScroll.setBounds(400, 42, 300, 100);
 
-        // Criando o bot√£o.
-        botaoAlterar = new JButton("Alterar");
-        botaoAlterar.setBounds(50, 200, 95, 30);
-        botaoAlterar.addActionListener(new BotaoAlterarListener());
+		// Adicionando a Tela janela.
+		janela.add(labelPainelDeScroll);
+		janela.add(painelDeScroll);
+		janela.add(botaoAlterar);
+		janela.add(labelNome);
+		janela.add(labelCidade);
+		janela.add(labelIdade);
+		janela.add(textFieldNome);
+		janela.add(textFieldCidade);
+		janela.add(textFieldIdade);
+		janela.add(botaoAlterar);
+		janela.setSize(800, 300);
+		janela.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		janela.setResizable(false);
+		janela.setVisible(true);
 
-        /*AO INV√âS DE PASSAR DIRETO, COLOCAMOS OS DADOS EM UM MODELO.*/
-        DefaultTableModel modelo = new DefaultTableModel(dados, colunas);
-        tabela = new JTable(modelo);
-        //INSERINDO TABELA EM UM PAINEL DE SCROLL.
-        painelDeScroll = new JScrollPane(tabela);
-        painelDeScroll.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
-        painelDeScroll.setBounds(400, 42, 300, 100);
+		try {
+			Connection conn = ConnectionFactory.getConnection();
+			AlunoDao aluno = new AlunoDao(conn);
+			List<Aluno> retornoAluno = new ArrayList<Aluno>();
+			retornoAluno = aluno.buscarTodosDao();
+			for (Aluno s : retornoAluno) {
+				modelo.addRow(new String[] { s.getNome(), Integer.toString(s.getIdade()), s.getCidade() });
+			}
+		} catch (SQLException e) {
+			System.out.println("Erro de Conex√£o");
+		}
+	}
 
-        // Adicionando a Tela janela.
-        janela.add(labelPainelDeScroll);
-        janela.add(painelDeScroll);
-        janela.add(botaoAlterar);
-        janela.add(labelNome);
-        janela.add(labelCidade);
-        janela.add(labelIdade);
-        janela.add(textFieldNome);
-        janela.add(textFieldCidade);
-        janela.add(textFieldIdade);
-        janela.add(botaoAlterar);
-        janela.setSize(800, 300);
-        janela.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        janela.setResizable(false);
-        janela.setVisible(true);
+	public class BotaoAlterarListener implements ActionListener {
+		public void actionPerformed(ActionEvent e) {
+			if (e.getSource() == botaoAlterar) {
+				Connection conn = ConnectionFactory.getConnection();
+				try {
+					AlunoDao alunoDao = new AlunoDao(conn);
+					Aluno aluno = new Aluno();
+					aluno.setNome(textFieldNome.getText().trim().toUpperCase());
+					aluno.setCidade(textFieldCidade.getText().trim().toUpperCase());
+					aluno.setIdade(Integer.parseInt(textFieldIdade.getText().trim()));
+					
+					// Atribuindo os valores dos textField nas variaveis.
+					String nome = textFieldNome.getText();
+					String cidade = textFieldCidade.getText();
+					int idade = Integer.parseInt(textFieldIdade.getText());
+					
+					alunoDao.alterar(idade, cidade, nome);
+					alunoDao.excluir(nome);
+					
+					if (tabela.getSelectedRow() != 0) {
+						alunoDao.excluir(nome);
+//						for(Aluno s: retornoAluno) {
+//							
+//						}
+					}
+					
+					System.out.println("Aluno alterado com sucesso!");
 
-//        try {
-//            Connection conn = ConnectionFactory.getConnection();
-//            AlunoDao aluno = new AlunoDao(conn);
-//            List<Aluno> retornoAluno = new ArrayList<Aluno>();
-//            retornoAluno = aluno.buscarTodosDao();
-//            for (Aluno s : retornoAluno) {
-//                modelo.addRow(new String[]{s.getNome(), Integer.toString(s.getIdade()), s.getCidade()});
-//            }
-//        } catch (SQLException e) {
-//            // TODO: handle exception
-//            System.out.println("Erro de Conex√£o");
-//        }
-    }
+					// Obtendo o modelo da JTable.
+					DefaultTableModel modelo = (DefaultTableModel) tabela.getModel();
+					modelo.addRow(
+							new String[] { aluno.getNome(), Integer.toString(aluno.getIdade()), aluno.getCidade() });
+					// Removendo a linha selecionada da JTable.
+					modelo.removeRow(tabela.getSelectedRow());
 
-    public class BotaoAlterarListener implements ActionListener {
-        public void actionPerformed(ActionEvent e) {
-            if (e.getSource() == botaoAlterar) {
-                Connection conn = ConnectionFactory.getConnection();
-                try {
-                    AlunoDao alunoDao = new AlunoDao();
-                    Aluno aluno = new Aluno();
-                    aluno.setNome(textFieldNome.getText().trim().toUpperCase());
-                    aluno.setCidade(textFieldCidade.getText().trim().toUpperCase());
-                    aluno.setIdade(Integer.parseInt(textFieldIdade.getText().trim()));
-                    alunoDao.alterar(aluno);
-                    System.out.println("Aluno inserido com sucesso!");
+					if (tabela.getModel() == null) {
+						JOptionPane.showMessageDialog(null, "O nome n„o pode estar vazio!", "InformaÁ„o", 2);
+					}
 
-                    // Obtendo o modelo da JTable.
-                    DefaultTableModel modelo = (DefaultTableModel) tabela.getModel();
-                    modelo.addRow(new String[]{aluno.getNome(), Integer.toString(aluno.getIdade()), aluno.getCidade()});
-                    // Removendo a linha selecionada da JTable.
-                    modelo.removeRow(tabela.getSelectedRow());
-
-                    if (tabela.getModel() == null) {
-                        JOptionPane.showMessageDialog(null, "O nome n√£o pode estar vazio!", "Informa√ß√£o", 2);
-                    }
-
-                    // FECHANDO O BANCO DE DADOS
-                    conn.close();
-                    JOptionPane.showMessageDialog(null, "ALTERA√á√ÉO REALIZADA COM SUCESSO", "INFORMA√á√ÉO", 2);
-                } catch (SQLException ee) {
-                    // TODO: handle exceptions
-                    JOptionPane.showMessageDialog(null, "ERRO AO INCLUIR ALUNO", "ERRO !!!", 2);
-                    ee.printStackTrace();
-                }
-            }
-        }
-    }
+					// FECHANDO O BANCO DE DADOS
+					conn.close();
+					JOptionPane.showMessageDialog(null, "ALTERA«¬O REALIZADA COM SUCESSO", "INFORMA«¬O", 2);
+				} catch (SQLException ee) {
+					// TODO: handle exceptions
+					JOptionPane.showMessageDialog(null, "ERRO AO ALTERAR ALUNO", "ERRO !!!", 2);
+					ee.printStackTrace();
+				}
+			}
+		}
+	}
 }

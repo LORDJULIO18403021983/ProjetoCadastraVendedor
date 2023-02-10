@@ -10,81 +10,73 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class AlunoDao {
-    private final Connection conn;
+	private final Connection conn;
 
-    public AlunoDao() {
-        this.conn = null;
-    }
+	public AlunoDao(Connection conn) {
+		this.conn = conn;
+	}
 
-    public void inserir(Aluno aluno) throws SQLException {
-        String sql = "insert into aluno (nome, idade, cidade) values (?, ?, ?)";
+	// INSERIR
+	public void inserir(String nome, int idade, String cidade) throws SQLException {
+		String sql = "insert into aluno (nome, idade, cidade) values (?, ?, ?)";
 
-        PreparedStatement pstm = conn.prepareStatement(sql);
+		PreparedStatement pstm = conn.prepareStatement(sql);
 
-        pstm.setString(1, aluno.getNome());
-        pstm.setInt(2, aluno.getIdade());
-        pstm.setString(3, aluno.getCidade());
+		pstm.setString(1, nome);
+		pstm.setInt(2, idade);
+		pstm.setString(3, cidade);
 
-        pstm.execute();
-    }
+		pstm.execute();
+	}
 
-    //CONSULTAR
-    public List<Aluno> buscarTodosDao() throws SQLException {
+	// CONSULTAR
+	public List<Aluno> buscarTodosDao() throws SQLException {
 
-        String sql = "select * from aluno ";
-        PreparedStatement pstm = conn.prepareStatement(sql);
-        ResultSet cursor = pstm.executeQuery();
+		String sql = "select * from aluno ";
+		PreparedStatement pstm = conn.prepareStatement(sql);
+		ResultSet cursor = pstm.executeQuery();
 
-        List<Aluno> alunos = new ArrayList<Aluno>();
+		List<Aluno> alunos = new ArrayList<Aluno>();
 
-        while (cursor.next()) {
-            Aluno aluno = new Aluno();
-            aluno.setNome(cursor.getString("nome"));
-            aluno.setIdade(cursor.getInt("idade"));
-            aluno.setCidade(cursor.getString("cidade"));
-            alunos.add(aluno);
-        }
-        return alunos;
-    }
+		while (cursor.next()) {
+			Aluno aluno = new Aluno();
+			aluno.setNome(cursor.getString("nome"));
+			aluno.setIdade(cursor.getInt("idade"));
+			aluno.setCidade(cursor.getString("cidade"));
+			alunos.add(aluno);
+		}
+		return alunos;
+	}
 
-    // dados ordenado pelo nome.
-    public Aluno Consultar(String nome) throws SQLException {
-        String sql = "select * from aluno where nome";
-        PreparedStatement pstm = conn.prepareStatement(sql);
+	// dados ordenado pelo nome.
+	public void Consultar(String nome) throws SQLException {
+		String sql = "select * from aluno order by nome";
+		PreparedStatement pstm = conn.prepareStatement(sql);
+		ResultSet cursor = pstm.executeQuery();
+		while (cursor.next()) {
+			// AS DUAS MANEIRAS SÂO ACEITADAS.
+			// System.out.println(cursor.getString(1));
+			System.out.println(cursor.getString("nome"));
+		}
+	}
 
-        ResultSet cursor = pstm.executeQuery();
-        Aluno aluno = new Aluno();
+	public void alterar(int idade, String cidade, String nome) throws SQLException {
+		String sql = "update aluno set idade = ?, cidade = ? where nome = ?";
 
-        while (cursor.next()) {
-            //System.out.println(cursor.getString("nome"));
-            aluno.setNome(cursor.getString("nome"));
-            aluno.setIdade(Integer.parseInt(cursor.getString("idade")));
-            aluno.setCidade(cursor.getString("cidade"));
-        }
-        return aluno;
-    }
+		PreparedStatement pstm = conn.prepareStatement(sql);
+		pstm.setInt(1, idade);
+		pstm.setString(2, cidade);
+		pstm.setString(3, nome);
 
-    public void alterar(Aluno aluno) throws SQLException {
-        String sql = "update aluno set idade = ?, cidade = ? where nome = ?";
+		pstm.execute();
+	}
 
-        PreparedStatement pstm = conn.prepareStatement(sql);
+	public void excluir(String nome) throws SQLException {
 
-        pstm.setInt(1, aluno.getIdade());
-        pstm.setString(2, aluno.getCidade());
-        pstm.setString(3, aluno.getNome());
+		String sql = "delete from aluno where nome = ?";
+		PreparedStatement pstm = conn.prepareStatement(sql);
 
-        pstm.execute();
-    }
-
-    public void excluir(Aluno aluno) throws SQLException {
-
-        String sql = "delete from aluno where nome = ?";
-        PreparedStatement pstm = conn.prepareStatement(sql);
-        try {
-            pstm.setString(1, "nome");
-            pstm.execute();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-    }
+		pstm.setString(1, nome);
+		pstm.execute();
+	}
 }
