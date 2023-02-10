@@ -1,9 +1,8 @@
 package com.br.bancoDeDados.util;
 
+import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
-
-import com.mysql.jdbc.Connection;
 
 public class ConnectionFactory {
 	public static Connection getConnection() {
@@ -18,12 +17,12 @@ public class ConnectionFactory {
 			Class.forName(driver);
 			System.out.println("Driver carregado com sucesso.");
 			conexao = (Connection) DriverManager.getConnection(local, login, senha);
-			System.out.println("Conexão estabelecida com sucesso.");
+			System.out.println("Conexï¿½o estabelecida com sucesso.");
 		} catch (ClassNotFoundException e) {
-			System.out.println("DRIVER NÃO ENCONTRADO.");
+			System.out.println("DRIVER Nï¿½O ENCONTRADO.");
 			e.printStackTrace();
 		} catch (SQLException e) {
-			System.out.println("ERRO DURANTE À CONEXÃO.");
+			System.out.println("ERRO DURANTE ï¿½ CONEXï¿½O.");
 			e.printStackTrace();
 		}
 		return conexao;
