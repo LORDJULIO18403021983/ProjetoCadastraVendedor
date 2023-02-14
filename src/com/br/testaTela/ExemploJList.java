@@ -6,14 +6,14 @@ import javax.swing.event.ListSelectionListener;
 import java.awt.*;
 
 public class ExemploJList {
-    // DeclaraÃ§Ã£o de referencias
+    // Declaração de referencias
     JFrame janela;
     JList list;
     JLabel label;
     JPanel painelDeJanela = null;
 
     //Cria um vetor com a lista para seleÃ§Ã£o
-    String[] diasSemana = {"Domingo", "Segunda", "TerÃ§a", "Quarta", "Quinta", "Sexta", "Sabado"};
+    String[] diasSemana = {"Domingo", "Segunda", "Terça", "Quarta", "Quinta", "Sexta", "Sabado"};
 
     public static void main(String[] args) {
         ExemploJList aplicativo = new ExemploJList();
@@ -38,7 +38,7 @@ public class ExemploJList {
         painelDeJanela.add(sp);
 
         // cria um rotulo
-        label = new JLabel("CTRL para multiseleÃ§Ãµes", JLabel.CENTER);
+        label = new JLabel("CTRL para multiseleções", JLabel.CENTER);
         label.setOpaque(true);
         label.setBackground(Color.lightGray);
         label.setForeground(Color.BLACK);

@@ -68,21 +68,17 @@ public class TestaInsereAluno2 {
 	public class BotaoListener implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
 			if (e.getSource() == buttonIncluir) {
-				Connection conn = ConnectionFactory.getConnection();
+				Connection conn = (Connection) ConnectionFactory.getConnection();
 				try {
 					AlunoDao alunoDAO = new AlunoDao(conn);
 					Aluno aluno = new Aluno();
+					// Converto os textField's em informação que o metodo inserir entenda.
 					aluno.setNome(textFieldNome.getText().toUpperCase());
 					aluno.setCidade(textFieldCidade.getText().toUpperCase());
 					aluno.setIdade(Integer.parseInt(textFieldIdade.getText()));
 
-					// Converto os textField's em informação que o metodo inserir entenda.
-					String nome = textFieldNome.getText().toUpperCase();
-					int idade = Integer.parseInt(textFieldIdade.getText());
-					String cidade = textFieldCidade.getText().toUpperCase();
-
 					// Alimento o metodo inserir com as informações digitadas dos textField's.
-					alunoDAO.inserir(nome, idade, cidade);
+					alunoDAO.inserir(aluno);
 					JOptionPane.showMessageDialog(null, "Aluno cadastrado com sucesso...", "INFORMAÇÃO ", 2);
 
 					// FECHANDO O BANCO DE DADOS
@@ -93,6 +89,8 @@ public class TestaInsereAluno2 {
 					JOptionPane.showMessageDialog(null, "Erro ao incluir Aluno ..", "Erro !!!", 2);
 					ee.printStackTrace();
 				}
+				JOptionPane.showMessageDialog(null, "Saindo ...", "Informação", 2);
+				System.exit(0);
 			}
 		}
 	}

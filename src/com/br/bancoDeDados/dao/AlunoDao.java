@@ -17,14 +17,14 @@ public class AlunoDao {
 	}
 
 	// INSERIR
-	public void inserir(String nome, int idade, String cidade) throws SQLException {
+	public void inserir(Aluno aluno) throws SQLException {
 		String sql = "insert into aluno (nome, idade, cidade) values (?, ?, ?)";
 
 		PreparedStatement pstm = conn.prepareStatement(sql);
 
-		pstm.setString(1, nome);
-		pstm.setInt(2, idade);
-		pstm.setString(3, cidade);
+		pstm.setString(1, aluno.getNome());
+		pstm.setInt(2, aluno.getIdade());
+		pstm.setString(3, aluno.getCidade());
 
 		pstm.execute();
 	}
@@ -49,7 +49,7 @@ public class AlunoDao {
 	}
 
 	// dados ordenado pelo nome.
-	public void Consultar(String nome) throws SQLException {
+	public void consultar(Aluno aluno) throws SQLException {
 		String sql = "select * from aluno order by nome";
 		PreparedStatement pstm = conn.prepareStatement(sql);
 		ResultSet cursor = pstm.executeQuery();
@@ -60,23 +60,23 @@ public class AlunoDao {
 		}
 	}
 
-	public void alterar(int idade, String cidade, String nome) throws SQLException {
+	public void alterar(Aluno aluno) throws SQLException {
 		String sql = "update aluno set idade = ?, cidade = ? where nome = ?";
 
 		PreparedStatement pstm = conn.prepareStatement(sql);
-		pstm.setInt(1, idade);
-		pstm.setString(2, cidade);
-		pstm.setString(3, nome);
+		pstm.setInt(1, aluno.getIdade());
+		pstm.setString(2, aluno.getCidade());
+		pstm.setString(3, aluno.getNome());
 
 		pstm.execute();
 	}
 
-	public void excluir(String nome) throws SQLException {
+	public void excluir(Aluno aluno) throws SQLException {
 
 		String sql = "delete from aluno where nome = ?";
 		PreparedStatement pstm = conn.prepareStatement(sql);
 
-		pstm.setString(1, nome);
+		pstm.setString(1, aluno.getNome());
 		pstm.execute();
 	}
 }

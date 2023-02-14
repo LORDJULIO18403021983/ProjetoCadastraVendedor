@@ -21,7 +21,6 @@ public class TestaAlterarAluno2 {
 	private JScrollPane painelDeScroll;
 	private String[] colunas = new String[] { "Nome", "Idade", "Cidade" };
 	private String[][] dados = new String[][] { {} };
-
 	private JFrame janela;
 
 	public TestaAlterarAluno2() {
@@ -103,26 +102,14 @@ public class TestaAlterarAluno2 {
 				try {
 					AlunoDao alunoDao = new AlunoDao(conn);
 					Aluno aluno = new Aluno();
+
+					// Atribuindo os valores dos textField nas variaveis.
 					aluno.setNome(textFieldNome.getText().trim().toUpperCase());
 					aluno.setCidade(textFieldCidade.getText().trim().toUpperCase());
 					aluno.setIdade(Integer.parseInt(textFieldIdade.getText().trim()));
-					
-					// Atribuindo os valores dos textField nas variaveis.
-					String nome = textFieldNome.getText();
-					String cidade = textFieldCidade.getText();
-					int idade = Integer.parseInt(textFieldIdade.getText());
-					
-					alunoDao.alterar(idade, cidade, nome);
-					alunoDao.excluir(nome);
-					
-					if (tabela.getSelectedRow() != 0) {
-						alunoDao.excluir(nome);
-//						for(Aluno s: retornoAluno) {
-//							
-//						}
-					}
-					
-					System.out.println("Aluno alterado com sucesso!");
+
+					alunoDao.alterar(aluno);
+					alunoDao.excluir(aluno);
 
 					// Obtendo o modelo da JTable.
 					DefaultTableModel modelo = (DefaultTableModel) tabela.getModel();
@@ -131,6 +118,12 @@ public class TestaAlterarAluno2 {
 					// Removendo a linha selecionada da JTable.
 					modelo.removeRow(tabela.getSelectedRow());
 
+					if (tabela.getSelectedRow() != 0) {
+						alunoDao.excluir(aluno);
+					}
+
+					System.out.println("Aluno alterado com sucesso!");
+					
 					if (tabela.getModel() == null) {
 						JOptionPane.showMessageDialog(null, "O nome não pode estar vazio!", "Informação", 2);
 					}

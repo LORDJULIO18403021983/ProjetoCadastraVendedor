@@ -6,6 +6,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.List;
 
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -49,18 +50,13 @@ public class TestaConsultaAluno2 {
 
 		try {
 			Connection conn = ConnectionFactory.getConnection();
-			AlunoDao aluno = new AlunoDao(conn);
-			Aluno aluno2 = new Aluno();
-
-			// Foi necessário chamar o metodo sql.
-			String sql = "select * from aluno order by nome";
-			PreparedStatement pstm = conn.prepareStatement(sql);
-			ResultSet cursor = pstm.executeQuery();
-			while (cursor.next()) {
-				// AS DUAS MANEIRAS SÂO ACEITADAS.
-				// System.out.println(cursor.getString(1));
-				comboAluno.addItem(cursor.getString("nome"));
+			AlunoDao alunoDao = new AlunoDao(conn);
+			alunoDao.buscarTodosDao();
+			List<Aluno> listaAluno = alunoDao.buscarTodosDao(); 
+			for(Aluno s: listaAluno) {
+				comboAluno.addItem(s.getNome());
 			}
+
 		} catch (SQLException e) {
 			// TODO: handle exception
 			JOptionPane.showMessageDialog(null, "ERRO DE CONEXÃO");
