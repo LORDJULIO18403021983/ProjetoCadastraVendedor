@@ -1,19 +1,14 @@
 package com.br.bancoDeDados.teste;
 
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.sql.SQLException;
-
-import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JOptionPane;
-import javax.swing.JTextField;
-
 import com.br.bancoDeDados.dao.AlunoDao;
 import com.br.bancoDeDados.model.Aluno;
 import com.br.bancoDeDados.util.ConnectionFactory;
-import com.mysql.jdbc.Connection;
+
+import javax.swing.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.sql.Connection;
+import java.sql.SQLException;
 
 public class TestaInsereAluno2 {
 

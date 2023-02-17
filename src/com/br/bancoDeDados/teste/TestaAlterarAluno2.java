@@ -17,7 +17,7 @@ public class TestaAlterarAluno2 {
 	private JLabel labelNome, labelIdade, labelCidade, labelPainelDeScroll;
 	private JTextField textFieldNome, textFieldIdade, textFieldCidade;
 	private JButton botaoAlterar;
-	private JTable tabela;
+	private JTable jTableTabela;
 	private JScrollPane painelDeScroll;
 	private String[] colunas = new String[] { "Nome", "Idade", "Cidade" };
 	private String[][] dados = new String[][] { {} };
@@ -60,9 +60,9 @@ public class TestaAlterarAluno2 {
 
 		/* AO INVÃ‰S DE PASSAR DIRETO, COLOCAMOS OS DADOS EM UM MODELO. */
 		DefaultTableModel modelo = new DefaultTableModel(dados, colunas);
-		tabela = new JTable(modelo);
+		jTableTabela = new JTable(modelo);
 		// INSERINDO TABELA EM UM PAINEL DE SCROLL.
-		painelDeScroll = new JScrollPane(tabela);
+		painelDeScroll = new JScrollPane(jTableTabela);
 		painelDeScroll.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
 		painelDeScroll.setBounds(400, 42, 300, 100);
 
@@ -104,33 +104,27 @@ public class TestaAlterarAluno2 {
 					Aluno aluno = new Aluno();
 
 					// Atribuindo os valores dos textField nas variaveis.
-					aluno.setNome(textFieldNome.getText().trim().toUpperCase());
-					aluno.setCidade(textFieldCidade.getText().trim().toUpperCase());
 					aluno.setIdade(Integer.parseInt(textFieldIdade.getText().trim()));
-
-					alunoDao.alterar(aluno);
-					alunoDao.excluir(aluno);
+					aluno.setCidade(textFieldCidade.getText().trim().toUpperCase());
+					aluno.setNome(textFieldNome.getText().trim().toUpperCase());
 
 					// Obtendo o modelo da JTable.
-					DefaultTableModel modelo = (DefaultTableModel) tabela.getModel();
-					modelo.addRow(
-							new String[] { aluno.getNome(), Integer.toString(aluno.getIdade()), aluno.getCidade() });
-					// Removendo a linha selecionada da JTable.
-					modelo.removeRow(tabela.getSelectedRow());
+					DefaultTableModel modelo = (DefaultTableModel) jTableTabela.getModel();
 
-					if (tabela.getSelectedRow() != 0) {
-						alunoDao.excluir(aluno);
-					}
+					// Criamos uma variável fila.
+					int row = jTableTabela.getSelectedRow();
 
-					System.out.println("Aluno alterado com sucesso!");
-					
-					if (tabela.getModel() == null) {
-						JOptionPane.showMessageDialog(null, "O nome não pode estar vazio!", "Informação", 2);
-					}
+					// Atribuindo os valores dos JTable's nas variaveis.
+					aluno.setNome(jTableTabela.getModel().getValueAt(row, 3).toString());
+					aluno.setCidade(jTableTabela.getModel().getValueAt(row, 2).toString());
+					aluno.setIdade(Integer.parseInt((jTableTabela.getModel().getValueAt(row, 1)).toString()));
+
+					// Executamos o metodo alterar.
+					alunoDao.alterar(aluno);
+					JOptionPane.showMessageDialog(null, "Parabéns, aluno alterado com sucesso !!!");
 
 					// FECHANDO O BANCO DE DADOS
 					conn.close();
-					JOptionPane.showMessageDialog(null, "ALTERAÇÂO REALIZADA COM SUCESSO", "INFORMAÇÂO", 2);
 				} catch (SQLException ee) {
 					// TODO: handle exceptions
 					JOptionPane.showMessageDialog(null, "ERRO AO ALTERAR ALUNO", "ERRO !!!", 2);

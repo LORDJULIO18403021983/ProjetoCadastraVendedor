@@ -1,31 +1,24 @@
 package com.br.bancoDeDados.teste;
 
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
-
-import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JOptionPane;
-import javax.swing.JScrollPane;
-import javax.swing.JTable;
-import javax.swing.table.DefaultTableModel;
-
 import com.br.bancoDeDados.dao.AlunoDao;
 import com.br.bancoDeDados.model.Aluno;
 import com.br.bancoDeDados.util.ConnectionFactory;
-import com.mysql.jdbc.Connection;
+
+import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.sql.Connection;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class TestaExcluirAluno2 {
 
 	// Declaração de referencias
 	private JFrame janela;
 	private JLabel labelPainelDeScroll;
-	private JTable tabela;
+	private JTable jTableTabela;
 	private JScrollPane painelDeScroll;
 	private String[] colunas = new String[] { "Nome", "Idade", "Cidade" };
 	private String[][] dados = new String[][] { {} };
@@ -61,9 +54,9 @@ public class TestaExcluirAluno2 {
 
 		/* AO INVÃ‰S DE PASSAR DIRETO, COLOCAMOS OS DADOS EM UM MODELO. */
 		DefaultTableModel modelo1 = new DefaultTableModel(dados, colunas);
-		tabela = new JTable(modelo1);
+		jTableTabela = new JTable(modelo1);
 		// INSERINDO TABELA EM UM PAINEL DE SCROLL.
-		painelDeScroll = new JScrollPane(tabela);
+		painelDeScroll = new JScrollPane(jTableTabela);
 		painelDeScroll.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
 		painelDeScroll.setBounds(40, 42, 300, 100);
 
@@ -104,30 +97,29 @@ public class TestaExcluirAluno2 {
 		public void actionPerformed(ActionEvent e) {
 			if (e.getSource() == botaoExcluir) {
 				Connection conn = (Connection) ConnectionFactory.getConnection();
-				AlunoDao alunoDao = new AlunoDao(conn);
-				Aluno aluno = new Aluno();
-
 				try {
-					// Obtendo o modelo da JTable.
-					DefaultTableModel modelo1 = (DefaultTableModel) tabela.getModel();
-					modelo1.addRow(
-							new String[] { aluno.getNome(), Integer.toString(aluno.getIdade()), aluno.getCidade() });
+					AlunoDao alunoDao = new AlunoDao(conn);
+					Aluno aluno = new Aluno();
 
-					if (tabela.getSelectedRow() != 0) {
-						JOptionPane.showMessageDialog(null, "Aluno apagado com sucesso", "Informação", 2);
+					// COLOCAMOS OS DADOS EM UM MODELO.
+					DefaultTableModel modelo1 = (DefaultTableModel) jTableTabela.getModel();
 
-						// Removendo a linha selecionada da JTable.
-						modelo1.removeRow(tabela.getSelectedRow());
-					}
+					// Criamos uma variável fila.
+					int row = jTableTabela.getSelectedRow();
+					aluno.setNome(jTableTabela.getModel().getValueAt(row, 0).toString());
 
+					// executamos o metodo excluir.
 					alunoDao.excluir(aluno);
+					JOptionPane.showMessageDialog(null, "Congratulation !!");
 
-					if (tabela.getModel() == null) {
-						JOptionPane.showMessageDialog(null, "O nome não pode estar vazio!", "Informação", 2);
-					}
-				} catch (SQLException e1) {
-					JOptionPane.showMessageDialog(null, "Erro ... o aluno não foi excluido!", "Informação", 2);
-					e1.printStackTrace();
+					// Removendo a linha selecionada da JTable.
+					modelo1.removeRow(jTableTabela.getSelectedRow());
+
+					// FECHANDO O BANCO DE DADOS
+					conn.close();
+
+				} catch (Exception erro) {
+					JOptionPane.showMessageDialog(null, erro.getMessage());
 				}
 			}
 		}
