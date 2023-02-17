@@ -7,7 +7,7 @@ import java.sql.SQLException;
 public class ConnectionFactory {
 	public static Connection getConnection() {
 		final String driver = "com.mysql.jdbc.Driver";
-		final String local = "jdbc:mysql://localhost/turmas";
+		final String local = "jdbc:mysql://localhost:3306/turmas";
 		final String login = "root";
 		final String senha = "root";
 
@@ -17,12 +17,12 @@ public class ConnectionFactory {
 			Class.forName(driver);
 			System.out.println("Driver carregado com sucesso.");
 			conexao = (Connection) DriverManager.getConnection(local, login, senha);
-			System.out.println("Conexï¿½o estabelecida com sucesso.");
+			System.out.println("Conexão estabelecida com sucesso.");
 		} catch (ClassNotFoundException e) {
-			System.out.println("DRIVER Nï¿½O ENCONTRADO.");
+			System.out.println("DRIVER NÃO ENCONTRADO.");
 			e.printStackTrace();
 		} catch (SQLException e) {
-			System.out.println("ERRO DURANTE ï¿½ CONEXï¿½O.");
+			System.out.println("ERRO DURANTE À CONEXÃO.");
 			e.printStackTrace();
 		}
 		return conexao;
