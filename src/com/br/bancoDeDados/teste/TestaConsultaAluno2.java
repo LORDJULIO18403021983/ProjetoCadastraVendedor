@@ -28,13 +28,13 @@ public class TestaConsultaAluno2 {
 	private JButton botaoOk;
 	private JLabel labelEscolher;
 
-	public TestaConsultaAluno2() {
-		iniciar();
-	}
-
-	public static void main(String[] args) {
-		new TestaConsultaAluno2();
-	}
+//	public TestaConsultaAluno2() {
+//		iniciar();
+//	}
+//
+//	public static void main(String[] args) {
+//		new TestaConsultaAluno2();
+//	}
 
 	public void iniciar() {
 

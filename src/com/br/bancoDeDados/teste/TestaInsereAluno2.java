@@ -17,15 +17,15 @@ public class TestaInsereAluno2 {
 	private JButton buttonIncluir;
 	private JFrame janela;
 
-	public TestaInsereAluno2() {
-		iniciar();
-	}
+//	public TestaInsereAluno2() {
+//		iniciar();
+//	}
+//
+//	public static void main(String[] args) {
+//		new TestaInsereAluno2();
+//	}
 
-	public static void main(String[] args) {
-		new TestaInsereAluno2();
-	}
-
-	private void iniciar() {
+	public void iniciar() {
 
 		janela = new JFrame("Cadastramento de Aluno");
 		janela.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

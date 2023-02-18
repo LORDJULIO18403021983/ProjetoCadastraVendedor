@@ -25,13 +25,13 @@ public class TestaExcluirAluno2 {
 	private JButton botaoExcluir;
 	private JButton botaoOk;
 
-	public TestaExcluirAluno2() {
-		iniciar();
-	}
-
-	public static void main(String[] args) {
-		new TestaExcluirAluno2();
-	}
+//	public TestaExcluirAluno2() {
+//		iniciar();
+//	}
+//
+//	public static void main(String[] args) {
+//		new TestaExcluirAluno2();
+//	}
 
 	@SuppressWarnings("unchecked")
 	public void iniciar() {

@@ -84,18 +84,18 @@ public class MenuBanco {
     }
 
     private static void cadastroAlunoActionListener(java.awt.event.ActionEvent evt) {
-        new TestaInsereAluno2();
+        new TestaInsereAluno2().iniciar();
     }
 
     private static void consultaAlunoActionListener(java.awt.event.ActionEvent evt) {
-        new TestaConsultaAluno2();
+        new TestaConsultaAluno2().iniciar();
     }
 
     private static void alterarAlunoActionListener(java.awt.event.ActionEvent evt) {
-        new TestaAlterarAluno2();
+        new TestaAlterarAluno2().iniciar();
     }
 
     private static void excluirAlunoActionListener(java.awt.event.ActionEvent evt) {
-        new TestaExcluirAluno2();
+        new TestaExcluirAluno2().iniciar();
     }
 }

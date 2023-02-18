@@ -23,13 +23,13 @@ public class TestaAlterarAluno2 {
 	private String[][] dados = new String[][] { {} };
 	private JFrame janela;
 
-	public TestaAlterarAluno2() {
-		iniciar();
-	}
-
-	public static void main(String[] args) {
-		new TestaAlterarAluno2();
-	}
+//	public TestaAlterarAluno2() {
+//		iniciar();
+//	}
+//
+//	public static void main(String[] args) {
+//		new TestaAlterarAluno2();
+//	}
 
 	public void iniciar() {
 		janela = new JFrame("TELA ALTERAR ALUNO");
